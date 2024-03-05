@@ -1,4 +1,4 @@
-Running scripts individually 
+# Running scripts individually 
 
 To reproduce the results of the paper you need to run the scripts in the following order from a terminal: 
 
@@ -52,7 +52,7 @@ python functional\_enrichment\_induced\_graph.py
 
 python highlighted\_pathway\_stats.py
 
-Visualization
+# Visualization
 
 For the visualization of the networks the yED (Version 3.21.1)  software was used in Ubuntu 22.04.3 LTS
 
@@ -76,17 +76,17 @@ From this point every other change is manual fine-tuning to the author’s taste
 
 Bonus tip: add the color legend boxes as big nodes next to the network (or Copy-Paste them from the existing graphmls). To add a new node drag and drop the desired shape from the Palette panel on the top right. 
 
-Biorosetta 
+# Biorosetta 
 
 The data files for Biorosetta are stored locally and no remote option is used in the current configuration. The last download of the data files are from February 2023. 
 
-HGNC tsv file (hgnc\_mapping.tsv)
+# HGNC tsv file (hgnc\_mapping.tsv)
 
 This TSV is used alongside biorosetta to convert from uniprot ids. To download a more recent version visit: <https://www.genenames.org/download/statistics-and-files/>.
 
 The version used to produce the results is from 05 Oct 2022. 
 
-Python package versions: 
+# Python package versions: 
 
 Python V=3.9.16
 
