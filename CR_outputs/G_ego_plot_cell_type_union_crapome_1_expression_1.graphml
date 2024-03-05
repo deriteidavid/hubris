@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d7" for="node" attr.name="font_style" attr.type="string"/>
+<key id="d6" for="node" attr.name="font_size" attr.type="long"/>
+<key id="d5" for="node" attr.name="height" attr.type="long"/>
+<key id="d4" for="node" attr.name="width" attr.type="long"/>
+<key id="d3" for="node" attr.name="font_color" attr.type="string"/>
+<key id="d2" for="node" attr.name="color" attr.type="string"/>
+<key id="d1" for="node" attr.name="name" attr.type="string"/>
+<key id="d0" for="node" attr.name="label" attr.type="string"/>
+<graph edgedefault="undirected"><node id="HHIP">
+  <data key="d0">GWAS</data>
+  <data key="d1">HHIP</data>
+  <data key="d2">#b30000</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="UGGT1">
+  <data key="d0">IMR90 and 16HBE</data>
+  <data key="d1">UGGT1</data>
+  <data key="d2">#5ad45a</data>
+  <data key="d3">#000000</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="EIF2S2">
+  <data key="d0">IMR90 and 16HBE</data>
+  <data key="d1">EIF2S2</data>
+  <data key="d2">#5ad45a</data>
+  <data key="d3">#000000</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="RPLP0">
+  <data key="d0">IMR90 and 16HBE</data>
+  <data key="d1">RPLP0</data>
+  <data key="d2">#5ad45a</data>
+  <data key="d3">#000000</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="TFG">
+  <data key="d0">IMR90 and 16HBE</data>
+  <data key="d1">TFG</data>
+  <data key="d2">#5ad45a</data>
+  <data key="d3">#000000</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="THBS1">
+  <data key="d0">16HBE</data>
+  <data key="d1">THBS1</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="CALM1">
+  <data key="d0">IMR90 and 16HBE</data>
+  <data key="d1">CALM1</data>
+  <data key="d2">#5ad45a</data>
+  <data key="d3">#000000</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="EIF2S3">
+  <data key="d0">16HBE</data>
+  <data key="d1">EIF2S3</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="TMED2">
+  <data key="d0">16HBE</data>
+  <data key="d1">TMED2</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="MAP4">
+  <data key="d0">IMR90</data>
+  <data key="d1">MAP4</data>
+  <data key="d2">#ffcc00</data>
+  <data key="d3">#000000</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="MMP9">
+  <data key="d0">16HBE</data>
+  <data key="d1">MMP9</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="GORASP2">
+  <data key="d0">16HBE</data>
+  <data key="d1">GORASP2</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="ASPH">
+  <data key="d0">IMR90</data>
+  <data key="d1">ASPH</data>
+  <data key="d2">#ffcc00</data>
+  <data key="d3">#000000</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="CAVIN1">
+  <data key="d0">IMR90</data>
+  <data key="d1">CAVIN1</data>
+  <data key="d2">#ffcc00</data>
+  <data key="d3">#000000</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="HSPA1A">
+  <data key="d0">16HBE</data>
+  <data key="d1">HSPA1A</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="RRBP1">
+  <data key="d0">IMR90</data>
+  <data key="d1">RRBP1</data>
+  <data key="d2">#ffcc00</data>
+  <data key="d3">#000000</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="TMED10">
+  <data key="d0">16HBE</data>
+  <data key="d1">TMED10</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="EIF2S1">
+  <data key="d0">16HBE</data>
+  <data key="d1">EIF2S1</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="HMGN1">
+  <data key="d0">16HBE</data>
+  <data key="d1">HMGN1</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="TP53">
+  <data key="d0">16HBE</data>
+  <data key="d1">TP53</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="TMED7">
+  <data key="d0">16HBE</data>
+  <data key="d1">TMED7</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="GREM1">
+  <data key="d0">IMR90</data>
+  <data key="d1">GREM1</data>
+  <data key="d2">#ffcc00</data>
+  <data key="d3">#000000</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="EEF1A1">
+  <data key="d0">16HBE</data>
+  <data key="d1">EEF1A1</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="PYM1">
+  <data key="d0">16HBE</data>
+  <data key="d1">PYM1</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<edge source="HHIP" target="UGGT1"/>
+<edge source="HHIP" target="EIF2S2"/>
+<edge source="HHIP" target="RPLP0"/>
+<edge source="HHIP" target="TFG"/>
+<edge source="HHIP" target="THBS1"/>
+<edge source="HHIP" target="CALM1"/>
+<edge source="HHIP" target="EIF2S3"/>
+<edge source="HHIP" target="TMED2"/>
+<edge source="HHIP" target="MAP4"/>
+<edge source="HHIP" target="MMP9"/>
+<edge source="HHIP" target="GORASP2"/>
+<edge source="HHIP" target="ASPH"/>
+<edge source="HHIP" target="CAVIN1"/>
+<edge source="HHIP" target="HSPA1A"/>
+<edge source="HHIP" target="RRBP1"/>
+<edge source="HHIP" target="TMED10"/>
+<edge source="HHIP" target="EIF2S1"/>
+<edge source="HHIP" target="HMGN1"/>
+<edge source="HHIP" target="TP53"/>
+<edge source="HHIP" target="TMED7"/>
+<edge source="HHIP" target="GREM1"/>
+<edge source="HHIP" target="EEF1A1"/>
+<edge source="HHIP" target="PYM1"/>
+<edge source="UGGT1" target="EIF2S3"/>
+<edge source="UGGT1" target="EIF2S1"/>
+<edge source="UGGT1" target="EIF2S2"/>
+<edge source="EIF2S2" target="EIF2S3"/>
+<edge source="EIF2S2" target="TP53"/>
+<edge source="EIF2S2" target="EIF2S1"/>
+<edge source="RPLP0" target="EIF2S3"/>
+<edge source="RPLP0" target="TP53"/>
+<edge source="RPLP0" target="EIF2S1"/>
+<edge source="RPLP0" target="HSPA1A"/>
+<edge source="RPLP0" target="EEF1A1"/>
+<edge source="THBS1" target="MMP9"/>
+<edge source="CALM1" target="HMGN1"/>
+<edge source="EIF2S3" target="TP53"/>
+<edge source="EIF2S3" target="EIF2S1"/>
+<edge source="EIF2S3" target="PYM1"/>
+<edge source="TMED2" target="TMED10"/>
+<edge source="TMED2" target="GORASP2"/>
+<edge source="TMED2" target="TMED7"/>
+<edge source="MAP4" target="TP53"/>
+<edge source="MAP4" target="EIF2S1"/>
+<edge source="MAP4" target="HSPA1A"/>
+<edge source="GORASP2" target="TMED7"/>
+<edge source="GORASP2" target="EEF1A1"/>
+<edge source="GORASP2" target="TMED10"/>
+<edge source="ASPH" target="TP53"/>
+<edge source="ASPH" target="CAVIN1"/>
+<edge source="ASPH" target="TMED10"/>
+<edge source="CAVIN1" target="HSPA1A"/>
+<edge source="CAVIN1" target="TMED10"/>
+<edge source="HSPA1A" target="TP53"/>
+<edge source="HSPA1A" target="EEF1A1"/>
+<edge source="RRBP1" target="EEF1A1"/>
+<edge source="TMED10" target="TMED7"/>
+<edge source="TP53" target="EEF1A1"/>
+</graph></graphml>

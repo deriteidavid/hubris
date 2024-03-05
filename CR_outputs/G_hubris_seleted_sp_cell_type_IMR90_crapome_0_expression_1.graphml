@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d5" for="node" attr.name="font_size" attr.type="long"/>
+<key id="d4" for="node" attr.name="height" attr.type="long"/>
+<key id="d3" for="node" attr.name="width" attr.type="long"/>
+<key id="d2" for="node" attr.name="font_color" attr.type="string"/>
+<key id="d1" for="node" attr.name="color" attr.type="string"/>
+<key id="d0" for="node" attr.name="name" attr.type="string"/>
+<graph edgedefault="undirected"><node id="HHIP">
+  <data key="d0">HHIP</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="HSPA5">
+  <data key="d0">HSPA5</data>
+  <data key="d1">#5ad45a</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="DSP">
+  <data key="d0">DSP</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="MAP4">
+  <data key="d0">MAP4</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="RRBP1">
+  <data key="d0">RRBP1</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="NCL">
+  <data key="d0">NCL</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="HSPA8">
+  <data key="d0">HSPA8</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="HNRNPA1">
+  <data key="d0">HNRNPA1</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="NPM1">
+  <data key="d0">NPM1</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="TET2">
+  <data key="d0">TET2</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="TUBB">
+  <data key="d0">TUBB</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="RPS18">
+  <data key="d0">RPS18</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="HNRNPH1">
+  <data key="d0">HNRNPH1</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="ACTB">
+  <data key="d0">ACTB</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="APPBP2">
+  <data key="d0">APPBP2</data>
+  <data key="d1">#ffffff</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="FBLN5">
+  <data key="d0">FBLN5</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="ASPH">
+  <data key="d0">ASPH</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="RPL10">
+  <data key="d0">RPL10</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="FAM13A">
+  <data key="d0">FAM13A</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="YBX1">
+  <data key="d0">YBX1</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="IREB2">
+  <data key="d0">IREB2</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<edge source="HHIP" target="HSPA5"/>
+<edge source="HHIP" target="MAP4"/>
+<edge source="HHIP" target="RRBP1"/>
+<edge source="HHIP" target="NCL"/>
+<edge source="HHIP" target="HSPA8"/>
+<edge source="HHIP" target="HNRNPA1"/>
+<edge source="HHIP" target="NPM1"/>
+<edge source="HHIP" target="TUBB"/>
+<edge source="HHIP" target="RPS18"/>
+<edge source="HHIP" target="HNRNPH1"/>
+<edge source="HHIP" target="ACTB"/>
+<edge source="HHIP" target="APPBP2"/>
+<edge source="HHIP" target="ASPH"/>
+<edge source="HHIP" target="RPL10"/>
+<edge source="HHIP" target="YBX1"/>
+<edge source="HSPA5" target="DSP"/>
+<edge source="DSP" target="MAP4"/>
+<edge source="DSP" target="RRBP1"/>
+<edge source="DSP" target="NCL"/>
+<edge source="DSP" target="HSPA8"/>
+<edge source="DSP" target="HNRNPA1"/>
+<edge source="DSP" target="NPM1"/>
+<edge source="HSPA8" target="TET2"/>
+<edge source="HSPA8" target="FAM13A"/>
+<edge source="TET2" target="TUBB"/>
+<edge source="TET2" target="RPS18"/>
+<edge source="TET2" target="HNRNPH1"/>
+<edge source="TET2" target="ACTB"/>
+<edge source="APPBP2" target="FBLN5"/>
+<edge source="FBLN5" target="ASPH"/>
+<edge source="FBLN5" target="RPL10"/>
+<edge source="YBX1" target="IREB2"/>
+</graph></graphml>

@@ -1,0 +1,2630 @@
+This program ran on stetson18 /d/q4/9983096.1.linux01.q
+1                                                      The SAS System                       14:31 Saturday, December 23, 2023
+
+NOTE: Copyright (c) 2016 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M6) 
+      Licensed to CHANNING DIVISION OF NETWORK MEDICINE - T&R, Site 70123069.
+NOTE: This session is executing on the Linux 3.10.0-1160.99.1.el7.x86_64 (LIN X64) platform.
+
+
+
+NOTE: Analytical products:
+      
+      SAS/STAT 15.1
+      SAS/ETS 15.1
+      SAS/OR 15.1
+      SAS/IML 15.1
+      SAS/QC 15.1
+
+NOTE: Additional host information:
+
+ Linux LIN X64 3.10.0-1160.99.1.el7.x86_64 #1 SMP Wed Sep 13 14:19:20 UTC 2023 x86_64 CentOS Linux release 7.9.2009 (Core) 
+
+You are running SAS 9. Some SAS 8 files will be automatically converted 
+by the V9 engine; others are incompatible.  Please see 
+http://support.sas.com/rnd/migration/planning/platform/64bit.html
+
+PROC MIGRATE will preserve current SAS file attributes and is 
+recommended for converting all your SAS libraries from any 
+SAS 8 release to SAS 9.  For details and examples, please see
+http://support.sas.com/rnd/migration/index.html
+
+
+This message is contained in the SAS news file, and is presented upon
+initialization.  Edit the file "news" in the "misc/base" directory to
+display site-specific news and information in the program log.
+The command line option "-nonews" will prevent this display.
+
+
+
+
+NOTE: SAS initialization used:
+      real time           0.17 seconds
+      cpu time            0.04 seconds
+      
+1          /* /udd/reeks/cavin1/CAVIN1.Yuan.23DEC2023.sas Program to use Yuan's PROR GLM program with 3-way factorial design,
+1        !  updated to assess signs, using all analytes tested,
+2          in all five repeats or three selected repeats */
+3          
+4          data temp1;
+5          input repeat sirna $ detect $ ct;
+6          cards;
+
+NOTE: The data set WORK.TEMP1 has 208 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+      
+
+215        ;
+216        run;
+217        
+218        proc sort data=temp1;
+219        by sirna;
+220        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP1 has 208 observations and 4 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+221        
+222        proc print data=temp1;
+223        var sirna repeat detect ct;
+224        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The PROCEDURE PRINT printed pages 1-3.
+2                                                      The SAS System                       14:31 Saturday, December 23, 2023
+
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.04 seconds
+      
+
+226        data temp2a;
+227        set temp1;
+228        if detect = 'CAVIN1' then delete; /* IL6 and GAPDH only*/
+229        if detect = 'IL8' then delete;
+230        if detect = 'IL33' then delete;
+231        if detect = 'S100A4' then delete;
+232        if detect = 'SIRT1' then delete;
+233        if detect = 'SIRT3' then delete;
+234        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP2A has 52 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+235        
+236        proc glm data=temp2a order=data;
+237        class repeat sirna detect;
+238        model ct = repeat|sirna|detect;
+239        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+240        contrast 'Treatment and Gene Effect for IL6 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+241        estimate 'Treatment and Gene Effect for IL6 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+242        run;
+
+243        
+
+NOTE: The PROCEDURE GLM printed pages 4-7.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.12 seconds
+      cpu time            0.04 seconds
+      
+
+244        data temp2b;
+245        set temp1;
+246        if detect = 'CAVIN1' then delete; /* IL6 and GAPDH only*/
+247        if detect = 'IL8' then delete;
+248        if detect = 'IL33' then delete;
+249        if detect = 'S100A4' then delete;
+250        if detect = 'SIRT1' then delete;
+251        if detect = 'SIRT3' then delete;
+252        if repeat=3 then delete;
+253        if repeat=5 then delete;
+254        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP2B has 28 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+255        
+256        proc glm data=temp2b order=data;
+257        class repeat sirna detect;
+258        model ct = repeat|sirna|detect;
+259        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+260        contrast 'Treatment and Gene Effect for IL6 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+261        estimate 'Treatment and Gene Effect for IL6 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+262        run;
+
+263        
+264        
+265        
+
+NOTE: The PROCEDURE GLM printed pages 8-11.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.03 seconds
+      
+3                                                      The SAS System                       14:31 Saturday, December 23, 2023
+
+
+266        data temp3a;
+267        set temp1;
+268        if detect = 'IL6' then delete; /* CAVIN1 and GAPDH only*/
+269        if detect = 'IL8' then delete;
+270        if detect = 'IL33' then delete;
+271        if detect = 'S100A4' then delete;
+272        if detect = 'SIRT1' then delete;
+273        if detect = 'SIRT3' then delete;
+274        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP3A has 52 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+275        
+276        proc glm data=temp3a order=data;
+277        class repeat sirna detect;
+278        model ct = repeat|sirna|detect;
+279        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+280        contrast 'Treatment and Gene Effect for CAVIN1 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+281        estimate 'Treatment and Gene Effect for CAVIN1 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+282        run;
+
+283        
+
+NOTE: The PROCEDURE GLM printed pages 12-15.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.08 seconds
+      cpu time            0.04 seconds
+      
+
+284        data temp3b;
+285        set temp1;
+286        if detect = 'IL6' then delete; /* CAVIN1 and GAPDH only*/
+287        if detect = 'IL8' then delete;
+288        if detect = 'IL33' then delete;
+289        if detect = 'S100A4' then delete;
+290        if detect = 'SIRT1' then delete;
+291        if detect = 'SIRT3' then delete;
+292        if repeat=3 then delete;
+293        if repeat=5 then delete;
+294        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP3B has 28 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+295        
+296        
+297        proc glm data=temp3b order=data;
+298        class repeat sirna detect;
+299        model ct = repeat|sirna|detect;
+300        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+301        contrast 'Treatment and Gene Effect for CAVIN1 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+302        estimate 'Treatment and Gene Effect for CAVIN1 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+303        run;
+
+304        
+305        
+
+NOTE: The PROCEDURE GLM printed pages 16-19.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.03 seconds
+      
+
+306        data temp4a;
+307        set temp1;
+308        if detect = 'IL6' then delete; /* IL8 and GAPDH only*/
+4                                                      The SAS System                       14:31 Saturday, December 23, 2023
+
+309        if detect = 'CAVIN1' then delete;
+310        if detect = 'IL33' then delete;
+311        if detect = 'S100A4' then delete;
+312        if detect = 'SIRT1' then delete;
+313        if detect = 'SIRT3' then delete;
+314        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP4A has 52 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.00 seconds
+      
+
+315        
+316        proc glm data=temp4a order=data;
+317        class repeat sirna detect;
+318        model ct = repeat|sirna|detect;
+319        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+320        contrast 'Treatment and Gene Effect for IL8 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+321        estimate 'Treatment and Gene Effect for IL8 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+322        run;
+
+323        
+
+NOTE: The PROCEDURE GLM printed pages 20-23.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.03 seconds
+      
+
+324        data temp4b;
+325        set temp1;
+326        if detect = 'IL6' then delete; /* IL8 and GAPDH only*/
+327        if detect = 'CAVIN1' then delete;
+328        if detect = 'IL33' then delete;
+329        if detect = 'S100A4' then delete;
+330        if detect = 'SIRT1' then delete;
+331        if detect = 'SIRT3' then delete;
+332        if repeat=3 then delete;
+333        if repeat=5 then delete;
+334        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP4B has 28 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+335        
+336        proc glm data=temp4b order=data;
+337        class repeat sirna detect;
+338        model ct = repeat|sirna|detect;
+339        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+340        contrast 'Treatment and Gene Effect for IL8 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+341        estimate 'Treatment and Gene Effect for IL8 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+342        run;
+
+343        
+
+NOTE: The PROCEDURE GLM printed pages 24-27.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.03 seconds
+      
+
+344        data temp5a;
+345        set temp1;
+346        if detect = 'IL6' then delete; /* IL33 and GAPDH only*/
+347        if detect = 'CAVIN1' then delete;
+348        if detect = 'IL8' then delete;
+349        if detect = 'S100A4' then delete;
+350        if detect = 'SIRT1' then delete;
+351        if detect = 'SIRT3' then delete;
+352        run;
+5                                                      The SAS System                       14:31 Saturday, December 23, 2023
+
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP5A has 52 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+353        
+354        proc glm data=temp5a order=data;
+355        class repeat sirna detect;
+356        model ct = repeat|sirna|detect;
+357        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+358        contrast 'Treatment and Gene Effect for IL33 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+359        estimate 'Treatment and Gene Effect for IL33 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+360        run;
+
+361        
+
+NOTE: The PROCEDURE GLM printed pages 28-31.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.04 seconds
+      
+
+362        data temp5b;
+363        set temp1;
+364        if detect = 'IL6' then delete; /* IL33 and GAPDH only*/
+365        if detect = 'CAVIN1' then delete;
+366        if detect = 'IL8' then delete;
+367        if detect = 'S100A4' then delete;
+368        if detect = 'SIRT1' then delete;
+369        if detect = 'SIRT3' then delete;
+370        if repeat=3 then delete;
+371        if repeat=5 then delete;
+372        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP5B has 28 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+373        
+374        proc glm data=temp5b order=data;
+375        class repeat sirna detect;
+376        model ct = repeat|sirna|detect;
+377        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+378        contrast 'Treatment and Gene Effect for IL33 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+379        estimate 'Treatment and Gene Effect for IL33 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+380        run;
+
+381        
+382        
+
+NOTE: The PROCEDURE GLM printed pages 32-35.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.05 seconds
+      cpu time            0.03 seconds
+      
+
+383        data temp6a;
+384        set temp1;
+385        if detect = 'IL6' then delete; /* S100A4 and GAPDH only*/
+386        if detect = 'CAVIN1' then delete;
+387        if detect = 'IL8' then delete;
+388        if detect = 'IL33' then delete;
+389        if detect = 'SIRT1' then delete;
+390        if detect = 'SIRT3' then delete;
+391        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP6A has 52 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+6                                                      The SAS System                       14:31 Saturday, December 23, 2023
+
+      cpu time            0.01 seconds
+      
+
+392        
+393        proc glm data=temp6a order=data;
+394        class repeat sirna detect;
+395        model ct = repeat|sirna|detect;
+396        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+397        contrast 'Treatment and Gene Effect for S100A4 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+398        estimate 'Treatment and Gene Effect for S100A4 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+399        run;
+
+400        
+
+NOTE: The PROCEDURE GLM printed pages 36-39.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.03 seconds
+      
+
+401        data temp6b;
+402        set temp1;
+403        if detect = 'IL6' then delete; /* S100A4 and GAPDH only*/
+404        if detect = 'CAVIN1' then delete;
+405        if detect = 'IL8' then delete;
+406        if detect = 'IL33' then delete;
+407        if detect = 'SIRT1' then delete;
+408        if detect = 'SIRT3' then delete;
+409        if repeat=3 then delete;
+410        if repeat=5 then delete;
+411        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP6B has 28 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+412        
+413        proc glm data=temp6b order=data;
+414        class repeat sirna detect;
+415        model ct = repeat|sirna|detect;
+416        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+417        contrast 'Treatment and Gene Effect for S100A4 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+418        estimate 'Treatment and Gene Effect for S100A4 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+419        run;
+
+420        
+
+NOTE: The PROCEDURE GLM printed pages 40-43.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.05 seconds
+      cpu time            0.02 seconds
+      
+
+421        data temp7a;
+422        set temp1;
+423        if detect = 'IL6' then delete; /* SIRT1 and GAPDH only*/
+424        if detect = 'CAVIN1' then delete;
+425        if detect = 'IL8' then delete;
+426        if detect = 'IL33' then delete;
+427        if detect = 'S100A4' then delete;
+428        if detect = 'SIRT3' then delete;
+429        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP7A has 52 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+430        
+431        proc glm data=temp7a order=data;
+432        class repeat sirna detect;
+7                                                      The SAS System                       14:31 Saturday, December 23, 2023
+
+433        model ct = repeat|sirna|detect;
+434        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+435        contrast 'Treatment and Gene Effect for SIRT1 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+436        estimate 'Treatment and Gene Effect for SIRT1 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+437        run;
+
+438        
+
+NOTE: The PROCEDURE GLM printed pages 44-47.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.04 seconds
+      
+
+439        data temp7b;
+440        set temp1;
+441        if detect = 'IL6' then delete; /* SIRT1 and GAPDH only*/
+442        if detect = 'CAVIN1' then delete;
+443        if detect = 'IL8' then delete;
+444        if detect = 'IL33' then delete;
+445        if detect = 'S100A4' then delete;
+446        if detect = 'SIRT3' then delete;
+447        if repeat=3 then delete;
+448        if repeat=5 then delete;
+449        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP7B has 28 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+450        
+451        proc glm data=temp7b order=data;
+452        class repeat sirna detect;
+453        model ct = repeat|sirna|detect;
+454        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+455        contrast 'Treatment and Gene Effect for SIRT1 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+456        estimate 'Treatment and Gene Effect for SIRT1 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+457        run;
+
+458        
+
+NOTE: The PROCEDURE GLM printed pages 48-51.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.05 seconds
+      cpu time            0.02 seconds
+      
+
+459        data temp8a;
+460        set temp1;
+461        if detect = 'IL6' then delete; /* SIRT3 and GAPDH only*/
+462        if detect = 'CAVIN1' then delete;
+463        if detect = 'IL8' then delete;
+464        if detect = 'IL33' then delete;
+465        if detect = 'S100A4' then delete;
+466        if detect = 'SIRT1' then delete;
+467        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP8A has 52 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+468        
+469        proc glm data=temp8a order=data;
+470        class repeat sirna detect;
+471        model ct = repeat|sirna|detect;
+472        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+473        contrast 'Treatment and Gene Effect for SIRT3 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+474        estimate 'Treatment and Gene Effect for SIRT3 all 5 repeats' sirna*detect 1 -1 -1 1 ;
+475        run;
+
+8                                                      The SAS System                       14:31 Saturday, December 23, 2023
+
+476        
+
+NOTE: The PROCEDURE GLM printed pages 52-55.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.03 seconds
+      
+
+477        data temp8b;
+478        set temp1;
+479        if detect = 'IL6' then delete; /* SIRT3 and GAPDH only*/
+480        if detect = 'CAVIN1' then delete;
+481        if detect = 'IL8' then delete;
+482        if detect = 'IL33' then delete;
+483        if detect = 'S100A4' then delete;
+484        if detect = 'SIRT1' then delete;
+485        if repeat=3 then delete;
+486        if repeat=5 then delete;
+487        run;
+
+NOTE: There were 208 observations read from the data set WORK.TEMP1.
+NOTE: The data set WORK.TEMP8B has 28 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+488        
+489        proc glm data=temp8b order=data;
+490        class repeat sirna detect;
+491        model ct = repeat|sirna|detect;
+492        lsmeans sirna*detect /pdiff cl tdiff adjust=tukey;
+493        contrast 'Treatment and Gene Effect for SIRT3 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+494        estimate 'Treatment and Gene Effect for SIRT3 3 selected repeats' sirna*detect 1 -1 -1 1 ;
+495        run;
+
+496        
+497        
+498        /* now calculate relative effects using delta delta Ct method
+499        
+500        data ct1;
+501        input repeat siRNA $ gapdhct hhipct sp3ct;
+502        cards;
+503        1 sp3 20.4561180 30.0776695 25.6477145
+504        1 nt  20.5309735 30.5909890 25.2185325
+505        2 sp3 19.8919280 28.3263815 25.3350685
+506        2 nt  19.8252710 29.1104860 24.9887295
+507        3 sp3 19.5058030 27.7605400 27.0309180
+508        3 nt  19.5810450 28.6820590 25.6902970
+509        4 sp3 19.4704810 29.7023905 25.0445055
+510        4 nt  19.4245900 30.4145050 24.4818865
+511        5 sp3 19.4108065 29.7099975 24.6528900
+512        5 nt  19.5189230 30.7543410 24.3361025
+513        ;
+514        run;
+515        
+516        data ct2;
+517        set ct1;
+518        deltahhip = hhipct - gapdhct;
+519        deltasp3 = sp3ct - gapdhct;
+520        run;
+521        
+522        proc print data = ct2;
+523        var repeat siRNA deltahhip deltasp3;
+524        run;
+525        
+526        data ct3;
+527        input repeat gene $ deltasi deltant;
+528        cards;
+529        1 hhip  9.6216   10.0600
+530        1 sp3   5.19160  4.68756
+531        2 hhip  8.4345   9.2852
+532        2 sp3   5.44314  5.16346
+533        3 hhip  8.2547   9.1010
+534        3 sp3   7.52512  6.10925
+535        4 hhip  10.2319  10.9899
+9                                                      The SAS System                       14:31 Saturday, December 23, 2023
+
+536        4 sp3   5.57402  5.05730
+537        5 hhip  10.2992  11.2354
+538        5 sp3   5.24208  4.81718
+539        ;
+540        run;
+541        
+542        data ct4;
+543        set ct3;
+544        deltdelt = deltasi - deltant;
+545        expdelt = 2**((-1)*(deltdelt));
+546        run;
+547        
+548        proc sort data=ct4;
+549        by gene;
+550        run;
+551        
+552        proc means data=ct4 mean stddev stderr;
+553        var deltdelt expdelt;
+554        by gene;
+555        run;
+556        
+557        */
+NOTE: The PROCEDURE GLM printed pages 56-59.
+NOTE: PROCEDURE GLM used (Total process time):
+      real time           0.05 seconds
+      cpu time            0.02 seconds
+      
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           1.63 seconds
+      cpu time            0.66 seconds
+      
+                                                       The SAS System                   14:31 Saturday, December 23, 2023   1
+
+                                        Obs     sirna      repeat    detect      ct
+
+                                          1    CavsiRNA       1      CAVIN1    27.541
+                                          2    CavsiRNA       1      CAVIN1    27.659
+                                          3    CavsiRNA       1      IL6       33.182
+                                          4    CavsiRNA       1      IL6       34.069
+                                          5    CavsiRNA       1      IL8       27.611
+                                          6    CavsiRNA       1      IL8       27.698
+                                          7    CavsiRNA       1      IL33      36.000
+                                          8    CavsiRNA       1      IL33      36.000
+                                          9    CavsiRNA       1      S100A4    33.941
+                                         10    CavsiRNA       1      S100A4    34.076
+                                         11    CavsiRNA       1      SIRT1     31.479
+                                         12    CavsiRNA       1      SIRT1     31.389
+                                         13    CavsiRNA       1      SIRT3     33.895
+                                         14    CavsiRNA       1      SIRT3     33.665
+                                         15    CavsiRNA       1      GAPDH     21.911
+                                         16    CavsiRNA       1      GAPDH     21.968
+                                         17    CavsiRNA       2      CAVIN1    24.936
+                                         18    CavsiRNA       2      CAVIN1    24.995
+                                         19    CavsiRNA       2      CAVIN1    25.115
+                                         20    CavsiRNA       2      CAVIN1    24.926
+                                         21    CavsiRNA       2      IL6       30.482
+                                         22    CavsiRNA       2      IL6       30.449
+                                         23    CavsiRNA       2      IL6       31.138
+                                         24    CavsiRNA       2      IL6       31.130
+                                         25    CavsiRNA       2      IL8       25.974
+                                         26    CavsiRNA       2      IL8       26.013
+                                         27    CavsiRNA       2      IL8       27.727
+                                         28    CavsiRNA       2      IL8       28.189
+                                         29    CavsiRNA       2      IL33      35.552
+                                         30    CavsiRNA       2      IL33      35.552
+                                         31    CavsiRNA       2      IL33      34.527
+                                         32    CavsiRNA       2      IL33      35.913
+                                         33    CavsiRNA       2      S100A4    30.034
+                                         34    CavsiRNA       2      S100A4    30.100
+                                         35    CavsiRNA       2      S100A4    29.846
+                                         36    CavsiRNA       2      S100A4    29.939
+                                         37    CavsiRNA       2      SIRT1     26.833
+                                         38    CavsiRNA       2      SIRT1     26.818
+                                         39    CavsiRNA       2      SIRT1     27.884
+                                         40    CavsiRNA       2      SIRT1     27.945
+                                         41    CavsiRNA       2      SIRT3     28.582
+                                         42    CavsiRNA       2      SIRT3     28.452
+                                         43    CavsiRNA       2      SIRT3     27.869
+                                         44    CavsiRNA       2      SIRT3     27.724
+                                         45    CavsiRNA       2      GAPDH     20.370
+                                         46    CavsiRNA       2      GAPDH     20.265
+                                         47    CavsiRNA       2      GAPDH     20.202
+                                         48    CavsiRNA       2      GAPDH     20.208
+                                         49    CavsiRNA       3      CAVIN1    28.146
+                                         50    CavsiRNA       3      CAVIN1    28.236
+                                         51    CavsiRNA       3      CAVIN1    28.887
+                                         52    CavsiRNA       3      CAVIN1    28.867
+                                         53    CavsiRNA       3      IL6       22.277
+                                         54    CavsiRNA       3      IL6       22.267
+                                         55    CavsiRNA       3      IL6       25.061
+                                         56    CavsiRNA       3      IL6       25.108
+                                         57    CavsiRNA       3      IL8       18.702
+                                         58    CavsiRNA       3      IL8       18.706
+                                         59    CavsiRNA       3      IL8       20.952
+                                         60    CavsiRNA       3      IL8       20.967
+                                         61    CavsiRNA       3      IL33      28.255
+                                         62    CavsiRNA       3      IL33      28.201
+                                         63    CavsiRNA       3      IL33      30.359
+                                         64    CavsiRNA       3      IL33      30.815
+                                         65    CavsiRNA       3      S100A4    29.502
+                                         66    CavsiRNA       3      S100A4    29.502
+                                         67    CavsiRNA       3      S100A4    29.328
+                                         68    CavsiRNA       3      S100A4    29.176
+                                         69    CavsiRNA       3      SIRT1     24.658
+                                         70    CavsiRNA       3      SIRT1     24.624
+                                         71    CavsiRNA       3      SIRT1     25.538
+                                         72    CavsiRNA       3      SIRT1     25.863
+                                         73    CavsiRNA       3      SIRT3     29.239
+                                         74    CavsiRNA       3      SIRT3     29.264
+                                                       The SAS System                   14:31 Saturday, December 23, 2023   2
+
+                                        Obs     sirna      repeat    detect      ct
+
+                                         75    CavsiRNA       3      SIRT3     29.083
+                                         76    CavsiRNA       3      SIRT3     29.232
+                                         77    CavsiRNA       3      GAPDH     20.174
+                                         78    CavsiRNA       3      GAPDH     20.123
+                                         79    CavsiRNA       3      GAPDH     20.985
+                                         80    CavsiRNA       3      GAPDH     21.085
+                                         81    CavsiRNA       4      CAVIN1    23.775
+                                         82    CavsiRNA       4      CAVIN1    23.828
+                                         83    CavsiRNA       4      IL6       29.719
+                                         84    CavsiRNA       4      IL6       29.939
+                                         85    CavsiRNA       4      IL8       22.775
+                                         86    CavsiRNA       4      IL8       22.751
+                                         87    CavsiRNA       4      IL33      31.295
+                                         88    CavsiRNA       4      IL33      30.928
+                                         89    CavsiRNA       4      S100A4    25.768
+                                         90    CavsiRNA       4      S100A4    26.089
+                                         91    CavsiRNA       4      SIRT1     25.667
+                                         92    CavsiRNA       4      SIRT1     25.647
+                                         93    CavsiRNA       4      SIRT3     27.704
+                                         94    CavsiRNA       4      SIRT3     27.913
+                                         95    CavsiRNA       4      GAPDH     17.985
+                                         96    CavsiRNA       4      GAPDH     17.985
+                                         97    CavsiRNA       5      CAVIN1    28.032
+                                         98    CavsiRNA       5      CAVIN1    28.762
+                                         99    CavsiRNA       5      IL6       31.003
+                                        100    CavsiRNA       5      IL6       31.916
+                                        101    CavsiRNA       5      IL8       26.575
+                                        102    CavsiRNA       5      IL8       26.095
+                                        103    CavsiRNA       5      IL33      37.245
+                                        104    CavsiRNA       5      IL33      38.273
+                                        105    CavsiRNA       5      S100A4    33.966
+                                        106    CavsiRNA       5      S100A4    33.108
+                                        107    CavsiRNA       5      SIRT1     27.334
+                                        108    CavsiRNA       5      SIRT1     27.707
+                                        109    CavsiRNA       5      SIRT3     36.338
+                                        110    CavsiRNA       5      SIRT3     35.946
+                                        111    CavsiRNA       5      GAPDH     24.922
+                                        112    CavsiRNA       5      GAPDH     23.601
+                                        113    ConsiRNA       1      CAVIN1    23.748
+                                        114    ConsiRNA       1      CAVIN1    23.780
+                                        115    ConsiRNA       1      IL6       33.135
+                                        116    ConsiRNA       1      IL6       32.934
+                                        117    ConsiRNA       1      IL8       28.426
+                                        118    ConsiRNA       1      IL8       28.197
+                                        119    ConsiRNA       1      IL33      36.184
+                                        120    ConsiRNA       1      IL33      36.067
+                                        121    ConsiRNA       1      S100A4    33.575
+                                        122    ConsiRNA       1      S100A4    34.440
+                                        123    ConsiRNA       1      SIRT1     31.056
+                                        124    ConsiRNA       1      SIRT1     31.109
+                                        125    ConsiRNA       1      SIRT3     34.602
+                                        126    ConsiRNA       1      SIRT3     33.777
+                                        127    ConsiRNA       1      GAPDH     22.152
+                                        128    ConsiRNA       1      GAPDH     22.086
+                                        129    ConsiRNA       2      CAVIN1    24.433
+                                        130    ConsiRNA       2      CAVIN1    24.390
+                                        131    ConsiRNA       2      IL6       30.793
+                                        132    ConsiRNA       2      IL6       30.757
+                                        133    ConsiRNA       2      IL8       27.371
+                                        134    ConsiRNA       2      IL8       27.760
+                                        135    ConsiRNA       2      IL33      35.247
+                                        136    ConsiRNA       2      IL33      34.985
+                                        137    ConsiRNA       2      S100A4    30.118
+                                        138    ConsiRNA       2      S100A4    30.398
+                                        139    ConsiRNA       2      SIRT1     27.858
+                                        140    ConsiRNA       2      SIRT1     27.964
+                                        141    ConsiRNA       2      SIRT3     28.068
+                                        142    ConsiRNA       2      SIRT3     27.911
+                                        143    ConsiRNA       2      GAPDH     21.185
+                                        144    ConsiRNA       2      GAPDH     20.489
+                                        145    ConsiRNA       3      CAVIN1    25.183
+                                        146    ConsiRNA       3      CAVIN1    25.077
+                                        147    ConsiRNA       3      CAVIN1    25.566
+                                        148    ConsiRNA       3      CAVIN1    25.562
+                                                       The SAS System                   14:31 Saturday, December 23, 2023   3
+
+                                        Obs     sirna      repeat    detect      ct
+
+                                        149    ConsiRNA       3      IL6       22.155
+                                        150    ConsiRNA       3      IL6       22.136
+                                        151    ConsiRNA       3      IL6       22.859
+                                        152    ConsiRNA       3      IL6       22.769
+                                        153    ConsiRNA       3      IL8       18.735
+                                        154    ConsiRNA       3      IL8       18.759
+                                        155    ConsiRNA       3      IL8       19.160
+                                        156    ConsiRNA       3      IL8       19.181
+                                        157    ConsiRNA       3      IL33      27.098
+                                        158    ConsiRNA       3      IL33      27.103
+                                        159    ConsiRNA       3      IL33      28.177
+                                        160    ConsiRNA       3      IL33      27.981
+                                        161    ConsiRNA       3      S100A4    29.636
+                                        162    ConsiRNA       3      S100A4    29.915
+                                        163    ConsiRNA       3      S100A4    29.879
+                                        164    ConsiRNA       3      S100A4    29.831
+                                        165    ConsiRNA       3      SIRT1     24.305
+                                        166    ConsiRNA       3      SIRT1     24.289
+                                        167    ConsiRNA       3      SIRT1     24.338
+                                        168    ConsiRNA       3      SIRT1     24.480
+                                        169    ConsiRNA       3      SIRT3     29.363
+                                        170    ConsiRNA       3      SIRT3     29.589
+                                        171    ConsiRNA       3      SIRT3     29.602
+                                        172    ConsiRNA       3      SIRT3     29.765
+                                        173    ConsiRNA       3      GAPDH     19.982
+                                        174    ConsiRNA       3      GAPDH     19.971
+                                        175    ConsiRNA       3      GAPDH     20.277
+                                        176    ConsiRNA       3      GAPDH     20.271
+                                        177    ConsiRNA       4      CAVIN1    21.469
+                                        178    ConsiRNA       4      CAVIN1    21.364
+                                        179    ConsiRNA       4      IL6       29.952
+                                        180    ConsiRNA       4      IL6       30.020
+                                        181    ConsiRNA       4      IL8       23.472
+                                        182    ConsiRNA       4      IL8       23.682
+                                        183    ConsiRNA       4      IL33      31.386
+                                        184    ConsiRNA       4      IL33      31.413
+                                        185    ConsiRNA       4      S100A4    26.232
+                                        186    ConsiRNA       4      S100A4    26.424
+                                        187    ConsiRNA       4      SIRT1     25.729
+                                        188    ConsiRNA       4      SIRT1     25.637
+                                        189    ConsiRNA       4      SIRT3     27.784
+                                        190    ConsiRNA       4      SIRT3     27.908
+                                        191    ConsiRNA       4      GAPDH     18.312
+                                        192    ConsiRNA       4      GAPDH     18.241
+                                        193    ConsiRNA       5      CAVIN1    26.417
+                                        194    ConsiRNA       5      CAVIN1    26.292
+                                        195    ConsiRNA       5      IL6       30.981
+                                        196    ConsiRNA       5      IL6       29.233
+                                        197    ConsiRNA       5      IL8       26.381
+                                        198    ConsiRNA       5      IL8       26.401
+                                        199    ConsiRNA       5      IL33      36.360
+                                        200    ConsiRNA       5      IL33      36.981
+                                        201    ConsiRNA       5      S100A4    24.489
+                                        202    ConsiRNA       5      S100A4    23.336
+                                        203    ConsiRNA       5      SIRT1     26.961
+                                        204    ConsiRNA       5      SIRT1     26.553
+                                        205    ConsiRNA       5      SIRT3     35.599
+                                        206    ConsiRNA       5      SIRT3     35.669
+                                        207    ConsiRNA       5      GAPDH     22.961
+                                        208    ConsiRNA       5      GAPDH     23.478
+                                                       The SAS System                   14:31 Saturday, December 23, 2023   4
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             5    1 2 3 4 5         
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    IL6 GAPDH         
+
+
+                                           Number of Observations Read          52
+                                           Number of Observations Used          52
+                                                       The SAS System                   14:31 Saturday, December 23, 2023   5
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       19     1268.959189       66.787326     160.10    <.0001
+
+                     Error                       32       13.348834        0.417151                     
+
+                     Corrected Total             51     1282.308023                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.989590      2.610289      0.645872      24.74333
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4     279.5560702      69.8890175     167.54    <.0001
+                     sirna                        1       1.9366230       1.9366230       4.64    0.0388
+                     repeat*sirna                 4       4.0900600       1.0225150       2.45    0.0660
+                     detect                       1     802.4668389     802.4668389    1923.68    <.0001
+                     repeat*detect                4     179.7792878      44.9448219     107.74    <.0001
+                     sirna*detect                 1       0.9561758       0.9561758       2.29    0.1398
+                     repeat*sirna*detect          4       0.1741337       0.0435334       0.10    0.9802
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4     279.4002054      69.8500514     167.45    <.0001
+                     sirna                        1       1.4178014       1.4178014       3.40    0.0745
+                     repeat*sirna                 4       4.0900600       1.0225150       2.45    0.0660
+                     detect                       1     873.3177605     873.3177605    2093.53    <.0001
+                     repeat*detect                4     176.3340883      44.0835221     105.68    <.0001
+                     sirna*detect                 1       0.7638005       0.7638005       1.83    0.1855
+                     repeat*sirna*detect          4       0.1741337       0.0435334       0.10    0.9802
+                                                       The SAS System                   14:31 Saturday, December 23, 2023   6
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    IL6         29.8784000           1
+                                       CavsiRNA    GAPDH       21.0078000           2
+                                       ConsiRNA    IL6         29.2764500           3
+                                       ConsiRNA    GAPDH       20.9154500           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    34.33573      2.260421      33.65734
+                                                          <.0001        0.1290        <.0001
+                                   2      -34.3357                    -31.0501      0.346789
+                                            <.0001                      <.0001        0.9854
+                                   3      -2.26042      31.05013                    30.51232
+                                            0.1290        <.0001                      <.0001
+                                   4      -33.6573      -0.34679      -30.5123              
+                                            <.0001        0.9854        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    IL6          29.878400       29.506292    30.250508
+                               CavsiRNA    GAPDH        21.007800       20.635692    21.379908
+                               ConsiRNA    IL6          29.276450       28.881770    29.671130
+                               ConsiRNA    GAPDH        20.915450       20.520770    21.310130
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2        8.870600        8.170639     9.570561
+                                     1    3        0.601950       -0.119553     1.323453
+                                     1    4        8.962950        8.241447     9.684453
+                                     2    3       -8.268650       -8.990153    -7.547147
+                                     2    4        0.092350       -0.629153     0.813853
+                                     3    4        8.361000        7.618580     9.103420
+                                                       The SAS System                   14:31 Saturday, December 23, 2023   7
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+       Contrast                                               DF     Contrast SS     Mean Square    F Value    Pr > F
+
+       Treatment and Gene Effect for IL6 all 5 repeats         1      0.76380047      0.76380047       1.83    0.1855
+
+
+                                                                                  Standard
+           Parameter                                              Estimate           Error    t Value    Pr > |t|
+
+           Treatment and Gene Effect for IL6 all 5 repeats      0.50960000      0.37660505       1.35      0.1855
+                                                       The SAS System                   14:31 Saturday, December 23, 2023   8
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             3    1 2 4             
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    IL6 GAPDH         
+
+
+                                           Number of Observations Read          28
+                                           Number of Observations Used          28
+                                                       The SAS System                   14:31 Saturday, December 23, 2023   9
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       11     908.3254264      82.5750388    1143.96    <.0001
+
+                     Error                       16       1.1549315       0.0721832                     
+
+                     Corrected Total             27     909.4803579                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.998730      1.043292      0.268669      25.75207
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2      53.9505124      26.9752562     373.71    <.0001
+                     sirna                        1       0.0893204       0.0893204       1.24    0.2824
+                     repeat*sirna                 2       0.2983225       0.1491613       2.07    0.1591
+                     detect                       1     850.7441286     850.7441286    11785.9    <.0001
+                     repeat*detect                2       2.6968620       1.3484310      18.68    <.0001
+                     sirna*detect                 1       0.4363948       0.4363948       6.05    0.0257
+                     repeat*sirna*detect          2       0.1098856       0.0549428       0.76    0.4833
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2      53.8070011      26.9035005     372.71    <.0001
+                     sirna                        1       0.0628625       0.0628625       0.87    0.3646
+                     repeat*sirna                 2       0.2983225       0.1491613       2.07    0.1591
+                     detect                       1     807.2285077     807.2285077    11183.0    <.0001
+                     repeat*detect                2       2.9326564       1.4663282      20.31    <.0001
+                     sirna*detect                 1       0.4120964       0.4120964       5.71    0.0295
+                     repeat*sirna*detect          2       0.1098856       0.0549428       0.76    0.4833
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  10
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    IL6         31.4180833           1
+                                       CavsiRNA    GAPDH       20.0619167           2
+                                       ConsiRNA    IL6         31.2651667           3
+                                       ConsiRNA    GAPDH       20.4108333           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    80.19825      1.029655      74.11662
+                                                          <.0001        0.7350        <.0001
+                                   2      -80.1982                    -75.4364      -2.34941
+                                            <.0001                      <.0001        0.1281
+                                   3      -1.02965      75.43638                    69.97544
+                                            0.7350        <.0001                      <.0001
+                                   4      -74.1166      2.349408      -69.9754              
+                                            <.0001        0.1281        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    IL6          31.418083       31.205823    31.630343
+                               CavsiRNA    GAPDH        20.061917       19.849657    20.274177
+                               ConsiRNA    IL6          31.265167       31.032647    31.497686
+                               ConsiRNA    GAPDH        20.410833       20.178314    20.643353
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2       11.356167       10.951046    11.761287
+                                     1    3        0.152917       -0.271977     0.577811
+                                     1    4       11.007250       10.582356    11.432144
+                                     2    3      -11.203250      -11.628144   -10.778356
+                                     2    4       -0.348917       -0.773811     0.075977
+                                     3    4       10.854333       10.410546    11.298121
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  11
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+     Contrast                                                    DF     Contrast SS     Mean Square    F Value    Pr > F
+
+     Treatment and Gene Effect for IL6 3 selected repeats         1      0.41209641      0.41209641       5.71    0.0295
+
+
+                                                                                     Standard
+         Parameter                                                   Estimate           Error    t Value    Pr > |t|
+
+         Treatment and Gene Effect for IL6 3 selected repeats      0.50183333      0.21002849       2.39      0.0295
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  12
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             5    1 2 3 4 5         
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    CAVIN1 GAPDH      
+
+
+                                           Number of Observations Read          52
+                                           Number of Observations Used          52
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  13
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       19     489.7239198      25.7749431     263.12    <.0001
+
+                     Error                       32       3.1346822       0.0979588                     
+
+                     Corrected Total             51     492.8586021                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.993640      1.347086      0.312984      23.23413
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4     119.1252728      29.7813182     304.02    <.0001
+                     sirna                        1      20.5891251      20.5891251     210.18    <.0001
+                     repeat*sirna                 4       6.3923966       1.5980992      16.31    <.0001
+                     detect                       1     304.3247156     304.3247156    3106.66    <.0001
+                     repeat*detect                4      18.8540248       4.7135062      48.12    <.0001
+                     sirna*detect                 1      17.0052357      17.0052357     173.60    <.0001
+                     repeat*sirna*detect          4       3.4331493       0.8582873       8.76    <.0001
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4     118.6258504      29.6564626     302.74    <.0001
+                     sirna                        1      18.3639752      18.3639752     187.47    <.0001
+                     repeat*sirna                 4       6.3923966       1.5980992      16.31    <.0001
+                     detect                       1     238.2644127     238.2644127    2432.29    <.0001
+                     repeat*detect                4      19.3692023       4.8423006      49.43    <.0001
+                     sirna*detect                 1      15.7494924      15.7494924     160.78    <.0001
+                     repeat*sirna*detect          4       3.4331493       0.8582873       8.76    <.0001
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  14
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    CAVIN1      26.6651000           1
+                                       CavsiRNA    GAPDH       21.0078000           2
+                                       ConsiRNA    CAVIN1      24.2587000           3
+                                       ConsiRNA    GAPDH       20.9154500           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    45.18845      18.64754      44.55487
+                                                          <.0001        <.0001        <.0001
+                                   2      -45.1885                    -25.1917      0.715634
+                                            <.0001                      <.0001        0.8902
+                                   3      -18.6475      25.19169                     25.1774
+                                            <.0001        <.0001                      <.0001
+                                   4      -44.5549      -0.71563      -25.1774              
+                                            <.0001        0.8902        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    CAVIN1       26.665100       26.484780    26.845420
+                               CavsiRNA    GAPDH        21.007800       20.827480    21.188120
+                               ConsiRNA    CAVIN1       24.258700       24.067442    24.449958
+                               ConsiRNA    GAPDH        20.915450       20.724192    21.106708
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2        5.657300        5.318106     5.996494
+                                     1    3        2.406400        2.056766     2.756034
+                                     1    4        5.749650        5.400016     6.099284
+                                     2    3       -3.250900       -3.600534    -2.901266
+                                     2    4        0.092350       -0.257284     0.441984
+                                     3    4        3.343250        2.983480     3.703020
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  15
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+      Contrast                                                  DF     Contrast SS     Mean Square    F Value    Pr > F
+
+      Treatment and Gene Effect for CAVIN1 all 5 repeats         1     15.74949236     15.74949236     160.78    <.0001
+
+
+                                                                                    Standard
+          Parameter                                                 Estimate           Error    t Value    Pr > |t|
+
+          Treatment and Gene Effect for CAVIN1 all 5 repeats      2.31405000      0.18249931      12.68      <.0001
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  16
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             3    1 2 4             
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    CAVIN1 GAPDH      
+
+
+                                           Number of Observations Read          28
+                                           Number of Observations Used          28
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  17
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       11     195.2802455      17.7527496     932.33    <.0001
+
+                     Error                       16       0.3046593       0.0190412                     
+
+                     Corrected Total             27     195.5849047                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.998442      0.617880      0.137990      22.33279
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2      50.4093323      25.2046661    1323.69    <.0001
+                     sirna                        1       4.9726088       4.9726088     261.15    <.0001
+                     repeat*sirna                 2       3.9037805       1.9518902     102.51    <.0001
+                     detect                       1     122.6414286     122.6414286    6440.84    <.0001
+                     repeat*detect                2       0.8163307       0.4081653      21.44    <.0001
+                     sirna*detect                 1      10.1722838      10.1722838     534.22    <.0001
+                     repeat*sirna*detect          2       2.3644809       1.1822404      62.09    <.0001
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2      50.2856835      25.1428417    1320.44    <.0001
+                     sirna                        1       6.0233924       6.0233924     316.33    <.0001
+                     repeat*sirna                 2       3.9037805       1.9518902     102.51    <.0001
+                     detect                       1     109.7452560     109.7452560    5763.57    <.0001
+                     repeat*detect                2       0.6937353       0.3468676      18.22    <.0001
+                     sirna*detect                 1      11.2019501      11.2019501     588.30    <.0001
+                     repeat*sirna*detect          2       2.3644809       1.1822404      62.09    <.0001
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  18
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    CAVIN1      25.4648333           1
+                                       CavsiRNA    GAPDH       20.0619167           2
+                                       ConsiRNA    CAVIN1      23.1973333           3
+                                       ConsiRNA    GAPDH       20.4108333           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    74.29034      29.72727      66.25871
+                                                          <.0001        <.0001        <.0001
+                                   2      -74.2903                    -41.1058      -4.57435
+                                            <.0001                      <.0001        0.0016
+                                   3      -29.7273      41.10579                    34.97619
+                                            <.0001        <.0001                      <.0001
+                                   4      -66.2587       4.57435      -34.9762              
+                                            <.0001        0.0016        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    CAVIN1       25.464833       25.355816    25.573851
+                               CavsiRNA    GAPDH        20.061917       19.952899    20.170934
+                               ConsiRNA    CAVIN1       23.197333       23.077910    23.316756
+                               ConsiRNA    GAPDH        20.410833       20.291410    20.530256
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2        5.402917        5.194845     5.610989
+                                     1    3        2.267500        2.049272     2.485728
+                                     1    4        5.054000        4.835772     5.272228
+                                     2    3       -3.135417       -3.353644    -2.917189
+                                     2    4       -0.348917       -0.567144    -0.130689
+                                     3    4        2.786500        2.558569     3.014431
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  19
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+   Contrast                                                       DF     Contrast SS     Mean Square    F Value    Pr > F
+
+   Treatment and Gene Effect for CAVIN1 3 selected repeats         1     11.20195010     11.20195010     588.30    <.0001
+
+
+                                                                                      Standard
+       Parameter                                                      Estimate           Error    t Value    Pr > |t|
+
+       Treatment and Gene Effect for CAVIN1 3 selected repeats      2.61641667      0.10787164      24.25      <.0001
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  20
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             5    1 2 3 4 5         
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    IL8 GAPDH         
+
+
+                                           Number of Observations Read          52
+                                           Number of Observations Used          52
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  21
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       19     540.2280345      28.4330544      78.23    <.0001
+
+                     Error                       32      11.6310580       0.3634706                     
+
+                     Corrected Total             51     551.8590925                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.978924      2.680752      0.602885      22.48940
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4     260.4720943      65.1180236     179.16    <.0001
+                     sirna                        1       0.0022548       0.0022548       0.01    0.9377
+                     repeat*sirna                 4       4.1446282       1.0361570       2.85    0.0397
+                     detect                       1     145.7953662     145.7953662     401.12    <.0001
+                     repeat*detect                4     128.7950099      32.1987525      88.59    <.0001
+                     sirna*detect                 1       0.1341747       0.1341747       0.37    0.5478
+                     repeat*sirna*detect          4       0.8845064       0.2211266       0.61    0.6595
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4     260.9692221      65.2423055     179.50    <.0001
+                     sirna                        1       0.0719440       0.0719440       0.20    0.6594
+                     repeat*sirna                 4       4.1446282       1.0361570       2.85    0.0397
+                     detect                       1     176.6316184     176.6316184     485.96    <.0001
+                     repeat*detect                4     124.9521607      31.2380402      85.94    <.0001
+                     sirna*detect                 1       0.3422036       0.3422036       0.94    0.3392
+                     repeat*sirna*detect          4       0.8845064       0.2211266       0.61    0.6595
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  22
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    IL8         24.7120000           1
+                                       CavsiRNA    GAPDH       21.0078000           2
+                                       ConsiRNA    IL8         24.9607500           3
+                                       ConsiRNA    GAPDH       20.9154500           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                     15.3603       -1.0007       15.2732
+                                                          <.0001        0.7501        <.0001
+                                   2      -15.3603                    -15.9024      0.371516
+                                            <.0001                      <.0001        0.9822
+                                   3        1.0007      15.90238                    15.81539
+                                            0.7501        <.0001                      <.0001
+                                   4      -15.2732      -0.37152      -15.8154              
+                                            <.0001        0.9822        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    IL8          24.712000       24.364659    25.059341
+                               CavsiRNA    GAPDH        21.007800       20.660459    21.355141
+                               ConsiRNA    IL8          24.960750       24.592339    25.329161
+                               ConsiRNA    GAPDH        20.915450       20.547039    21.283861
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2        3.704200        3.050826     4.357574
+                                     1    3       -0.248750       -0.922232     0.424732
+                                     1    4        3.796550        3.123068     4.470032
+                                     2    3       -3.952950       -4.626432    -3.279468
+                                     2    4        0.092350       -0.581132     0.765832
+                                     3    4        4.045300        3.352293     4.738307
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  23
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+       Contrast                                               DF     Contrast SS     Mean Square    F Value    Pr > F
+
+       Treatment and Gene Effect for IL8 all 5 repeats         1      0.34220356      0.34220356       0.94    0.3392
+
+
+                                                                                  Standard
+           Parameter                                              Estimate           Error    t Value    Pr > |t|
+
+           Treatment and Gene Effect for IL8 all 5 repeats     -0.34110000      0.35153946      -0.97      0.3392
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  24
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             3    1 2 4             
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    IL8 GAPDH         
+
+
+                                           Number of Observations Read          28
+                                           Number of Observations Used          28
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  25
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       11     341.7775741      31.0706886     113.98    <.0001
+
+                     Error                       16       4.3614640       0.2725915                     
+
+                     Corrected Total             27     346.1390381                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.987400      2.245587      0.522103      23.25018
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2      82.5364511      41.2682256     151.39    <.0001
+                     sirna                        1       1.8333024       1.8333024       6.73    0.0196
+                     repeat*sirna                 2       0.0332223       0.0166112       0.06    0.9411
+                     detect                       1     253.7249418     253.7249418     930.79    <.0001
+                     repeat*detect                2       3.3990196       1.6995098       6.23    0.0100
+                     sirna*detect                 1       0.1556523       0.1556523       0.57    0.4608
+                     repeat*sirna*detect          2       0.0949846       0.0474923       0.17    0.8417
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2      83.3776731      41.6888366     152.94    <.0001
+                     sirna                        1       1.7557375       1.7557375       6.44    0.0219
+                     repeat*sirna                 2       0.0332224       0.0166112       0.06    0.9411
+                     detect                       1     228.2207347     228.2207347     837.23    <.0001
+                     repeat*detect                2       3.2373103       1.6186551       5.94    0.0118
+                     sirna*detect                 1       0.1869447       0.1869447       0.69    0.4198
+                     repeat*sirna*detect          2       0.0949846       0.0474923       0.17    0.8417
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  26
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    IL8         25.7977500           1
+                                       CavsiRNA    GAPDH       20.0619167           2
+                                       ConsiRNA    IL8         26.4846667           3
+                                       ConsiRNA    GAPDH       20.4108333           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    20.84451      -2.38014      18.66547
+                                                          <.0001        0.1214        <.0001
+                                   2      -20.8445                    -22.2546      -1.20898
+                                            <.0001                      <.0001        0.6302
+                                   3      2.380142       22.2546                    20.14964
+                                            0.1214        <.0001                      <.0001
+                                   4      -18.6655      1.208984      -20.1496              
+                                            <.0001        0.6302        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    IL8          25.797750       25.385267    26.210233
+                               CavsiRNA    GAPDH        20.061917       19.649433    20.474400
+                               ConsiRNA    IL8          26.484667       26.032814    26.936519
+                               ConsiRNA    GAPDH        20.410833       19.958981    20.862686
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2        5.735833        4.948566     6.523101
+                                     1    3       -0.686917       -1.512610     0.138776
+                                     1    4        5.386917        4.561224     6.212610
+                                     2    3       -6.422750       -7.248443    -5.597057
+                                     2    4       -0.348917       -1.174610     0.476776
+                                     3    4        6.073833        5.211425     6.936242
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  27
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+     Contrast                                                    DF     Contrast SS     Mean Square    F Value    Pr > F
+
+     Treatment and Gene Effect for IL8 3 selected repeats         1      0.18694473      0.18694473       0.69    0.4198
+
+
+                                                                                     Standard
+         Parameter                                                   Estimate           Error    t Value    Pr > |t|
+
+         Treatment and Gene Effect for IL8 3 selected repeats     -0.33800000      0.40814666      -0.83      0.4198
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  28
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             5    1 2 3 4 5         
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    IL33 GAPDH        
+
+
+                                           Number of Observations Read          52
+                                           Number of Observations Used          52
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  29
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       19     2324.876525      122.361922     365.89    <.0001
+
+                     Error                       32       10.701450        0.334420                     
+
+                     Corrected Total             51     2335.577975                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.995418      2.149341      0.578291      26.90550
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4      287.324343       71.831086     214.79    <.0001
+                     sirna                        1        2.307935        2.307935       6.90    0.0131
+                     repeat*sirna                 4        5.456123        1.364031       4.08    0.0088
+                     detect                       1     1928.922255     1928.922255    5767.96    <.0001
+                     repeat*detect                4       98.560585       24.640146      73.68    <.0001
+                     sirna*detect                 1        1.221921        1.221921       3.65    0.0649
+                     repeat*sirna*detect          4        1.083363        0.270841       0.81    0.5282
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4      286.585308       71.646327     214.24    <.0001
+                     sirna                        1        1.223224        1.223224       3.66    0.0648
+                     repeat*sirna                 4        5.456123        1.364031       4.08    0.0088
+                     detect                       1     1896.005718     1896.005718    5669.53    <.0001
+                     repeat*detect                4       94.124909       23.531227      70.36    <.0001
+                     sirna*detect                 1        0.622894        0.622894       1.86    0.1818
+                     repeat*sirna*detect          4        1.083363        0.270841       0.81    0.5282
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  30
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    IL33        33.9328000           1
+                                       CavsiRNA    GAPDH       21.0078000           2
+                                       ConsiRNA    IL33        33.3802500           3
+                                       ConsiRNA    GAPDH       20.9154500           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    55.87586      2.317399      54.59487
+                                                          <.0001        0.1152        <.0001
+                                   2      -55.8759                    -51.8901      0.387317
+                                            <.0001                      <.0001        0.9799
+                                   3       -2.3174      51.89015                    50.80457
+                                            0.1152        <.0001                      <.0001
+                                   4      -54.5949      -0.38732      -50.8046              
+                                            <.0001        0.9799        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    IL33         33.932800       33.599628    34.265972
+                               CavsiRNA    GAPDH        21.007800       20.674628    21.340972
+                               ConsiRNA    IL33         33.380250       33.026868    33.733632
+                               ConsiRNA    GAPDH        20.915450       20.562068    21.268832
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2       12.925000       12.298280    13.551720
+                                     1    3        0.552550       -0.093458     1.198558
+                                     1    4       13.017350       12.371342    13.663358
+                                     2    3      -12.372450      -13.018458   -11.726442
+                                     2    4        0.092350       -0.553658     0.738358
+                                     3    4       12.464800       11.800063    13.129537
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  31
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+       Contrast                                                DF     Contrast SS     Mean Square    F Value    Pr > F
+
+       Treatment and Gene Effect for IL33 all 5 repeats         1      0.62289424      0.62289424       1.86    0.1818
+
+
+                                                                                   Standard
+           Parameter                                               Estimate           Error    t Value    Pr > |t|
+
+           Treatment and Gene Effect for IL33 all 5 repeats      0.46020000      0.33719862       1.36      0.1818
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  32
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             3    1 2 4             
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    IL33 GAPDH        
+
+
+                                           Number of Observations Read          28
+                                           Number of Observations Used          28
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  33
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       11     1482.796800      134.799709    1491.23    <.0001
+
+                     Error                       16        1.446315        0.090395                     
+
+                     Corrected Total             27     1484.243116                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.999026      1.101297      0.300657      27.30029
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2       82.716256       41.358128     457.53    <.0001
+                     sirna                        1        0.250454        0.250454       2.77    0.1155
+                     repeat*sirna                 2        0.026290        0.013145       0.15    0.8658
+                     detect                       1     1395.762004     1395.762004    15440.7    <.0001
+                     repeat*detect                2        3.563470        1.781735      19.71    <.0001
+                     sirna*detect                 1        0.210693        0.210693       2.33    0.1464
+                     repeat*sirna*detect          2        0.267633        0.133817       1.48    0.2571
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2       82.586437       41.293218     456.81    <.0001
+                     sirna                        1        0.257581        0.257581       2.85    0.1108
+                     repeat*sirna                 2        0.026290        0.013145       0.15    0.8658
+                     detect                       1     1274.378229     1274.378229    14097.9    <.0001
+                     repeat*detect                2        2.842735        1.421367      15.72    0.0002
+                     sirna*detect                 1        0.148338        0.148338       1.64    0.2184
+                     repeat*sirna*detect          2        0.267633        0.133817       1.48    0.2571
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  34
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    IL33        34.1658333           1
+                                       CavsiRNA    GAPDH       20.0619167           2
+                                       ConsiRNA    IL33        34.2136667           3
+                                       ConsiRNA    GAPDH       20.4108333           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    89.00604      -0.28782      82.76448
+                                                          <.0001        0.9914        <.0001
+                                   2       -89.006                    -85.1517      -2.09945
+                                            <.0001                      <.0001        0.1953
+                                   3      0.287815      85.15175                    79.51652
+                                            0.9914        <.0001                      <.0001
+                                   4      -82.7645      2.099448      -79.5165              
+                                            <.0001        0.1953        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    IL33         34.165833       33.928302    34.403365
+                               CavsiRNA    GAPDH        20.061917       19.824385    20.299448
+                               ConsiRNA    IL33         34.213667       33.953464    34.473870
+                               ConsiRNA    GAPDH        20.410833       20.150630    20.671036
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2       14.103917       13.650562    14.557271
+                                     1    3       -0.047833       -0.523315     0.427649
+                                     1    4       13.755000       13.279518    14.230482
+                                     2    3      -14.151750      -14.627232   -13.676268
+                                     2    4       -0.348917       -0.824399     0.126565
+                                     3    4       13.802833       13.306209    14.299458
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  35
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+    Contrast                                                     DF     Contrast SS     Mean Square    F Value    Pr > F
+
+    Treatment and Gene Effect for IL33 3 selected repeats         1      0.14833828      0.14833828       1.64    0.2184
+
+
+                                                                                     Standard
+        Parameter                                                    Estimate           Error    t Value    Pr > |t|
+
+        Treatment and Gene Effect for IL33 3 selected repeats      0.30108333      0.23503448       1.28      0.2184
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  36
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             5    1 2 3 4 5         
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    S100A4 GAPDH      
+
+
+                                           Number of Observations Read          52
+                                           Number of Observations Used          52
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  37
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       19     1326.999231       69.842065     582.59    <.0001
+
+                     Error                       32        3.836212        0.119882                     
+
+                     Corrected Total             51     1330.835443                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.997117      1.370371      0.346239      25.26610
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4      148.125092       37.031273     308.90    <.0001
+                     sirna                        1        5.995920        5.995920      50.02    <.0001
+                     repeat*sirna                 4       51.632871       12.908218     107.67    <.0001
+                     detect                       1     1030.255167     1030.255167    8593.94    <.0001
+                     repeat*detect                4       53.260829       13.315207     111.07    <.0001
+                     sirna*detect                 1        4.140709        4.140709      34.54    <.0001
+                     repeat*sirna*detect          4       33.588643        8.397161      70.05    <.0001
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4     148.1626431      37.0406608     308.98    <.0001
+                     sirna                        1       9.4686267       9.4686267      78.98    <.0001
+                     repeat*sirna                 4      51.6328715      12.9082179     107.67    <.0001
+                     detect                       1     901.4714739     901.4714739    7519.68    <.0001
+                     repeat*detect                4      52.8954868      13.2238717     110.31    <.0001
+                     sirna*detect                 1       7.6195624       7.6195624      63.56    <.0001
+                     repeat*sirna*detect          4      33.5886432       8.3971608      70.05    <.0001
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  38
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    S100A4      30.5661500           1
+                                       CavsiRNA    GAPDH       21.0078000           2
+                                       ConsiRNA    S100A4      28.8642500           3
+                                       ConsiRNA    GAPDH       20.9154500           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                     69.0155      11.92157      67.60177
+                                                          <.0001        <.0001        <.0001
+                                   2      -69.0155                    -55.0333      0.646898
+                                            <.0001                      <.0001        0.9159
+                                   3      -11.9216       55.0333                    54.11143
+                                            <.0001        <.0001                      <.0001
+                                   4      -67.6018       -0.6469      -54.1114              
+                                            <.0001        0.9159        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    S100A4       30.566150       30.366671    30.765629
+                               CavsiRNA    GAPDH        21.007800       20.808321    21.207279
+                               ConsiRNA    S100A4       28.864250       28.652670    29.075830
+                               ConsiRNA    GAPDH        20.915450       20.703870    21.127030
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2        9.558350        9.183115     9.933585
+                                     1    3        1.701900        1.315117     2.088683
+                                     1    4        9.650700        9.263917    10.037483
+                                     2    3       -7.856450       -8.243233    -7.469667
+                                     2    4        0.092350       -0.294433     0.479133
+                                     3    4        7.948800        7.550803     8.346797
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  39
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+      Contrast                                                  DF     Contrast SS     Mean Square    F Value    Pr > F
+
+      Treatment and Gene Effect for S100A4 all 5 repeats         1      7.61956236      7.61956236      63.56    <.0001
+
+
+                                                                                    Standard
+          Parameter                                                 Estimate           Error    t Value    Pr > |t|
+
+          Treatment and Gene Effect for S100A4 all 5 repeats      1.60955000      0.20189044       7.97      <.0001
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  40
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             3    1 2 4             
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    S100A4 GAPDH      
+
+
+                                           Number of Observations Read          28
+                                           Number of Observations Used          28
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  41
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       11     832.2891690      75.6626517    1520.77    <.0001
+
+                     Error                       16       0.7960480       0.0497530                     
+
+                     Corrected Total             27     833.0852170                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.999044      0.886719      0.223054      25.15496
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2     138.9715234      69.4857617    1396.61    <.0001
+                     sirna                        1       0.6049100       0.6049100      12.16    0.0030
+                     repeat*sirna                 2       0.1359723       0.0679861       1.37    0.2832
+                     detect                       1     676.4121300     676.4121300    13595.4    <.0001
+                     repeat*detect                2      16.0835069       8.0417535     161.63    <.0001
+                     sirna*detect                 1       0.0330176       0.0330176       0.66    0.4272
+                     repeat*sirna*detect          2       0.0481087       0.0240543       0.48    0.6254
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2     139.1596051      69.5798025    1398.50    <.0001
+                     sirna                        1       0.5400822       0.5400822      10.86    0.0046
+                     repeat*sirna                 2       0.1359723       0.0679861       1.37    0.2832
+                     detect                       1     634.8844480     634.8844480    12760.7    <.0001
+                     repeat*detect                2      16.1304118       8.0652059     162.10    <.0001
+                     sirna*detect                 1       0.0248909       0.0248909       0.50    0.4895
+                     repeat*sirna*detect          2       0.0481087       0.0240543       0.48    0.6254
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  42
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    S100A4      29.9722500           1
+                                       CavsiRNA    GAPDH       20.0619167           2
+                                       ConsiRNA    S100A4      30.1978333           3
+                                       ConsiRNA    GAPDH       20.4108333           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    84.30045      -1.82958      77.54745
+                                                          <.0001        0.2962        <.0001
+                                   2      -84.3004                    -82.2069      -2.82987
+                                            <.0001                      <.0001        0.0531
+                                   3      1.829584      82.20691                    75.99772
+                                            0.2962        <.0001                      <.0001
+                                   4      -77.5474      2.829873      -75.9977              
+                                            <.0001        0.0531        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    S100A4       29.972250       29.796028    30.148472
+                               CavsiRNA    GAPDH        20.061917       19.885695    20.238139
+                               ConsiRNA    S100A4       30.197833       30.004792    30.390875
+                               ConsiRNA    GAPDH        20.410833       20.217792    20.603875
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2        9.910333        9.573995    10.246671
+                                     1    3       -0.225583       -0.578337     0.127171
+                                     1    4        9.561417        9.208663     9.914171
+                                     2    3      -10.135917      -10.488671    -9.783163
+                                     2    4       -0.348917       -0.701671     0.003837
+                                     3    4        9.787000        9.418560    10.155440
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  43
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+   Contrast                                                       DF     Contrast SS     Mean Square    F Value    Pr > F
+
+   Treatment and Gene Effect for S100A4 3 selected repeats         1      0.02489091      0.02489091       0.50    0.4895
+
+
+                                                                                      Standard
+       Parameter                                                      Estimate           Error    t Value    Pr > |t|
+
+       Treatment and Gene Effect for S100A4 3 selected repeats      0.12333333      0.17436918       0.71      0.4895
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  44
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             5    1 2 3 4 5         
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    SIRT1 GAPDH       
+
+
+                                           Number of Observations Read          52
+                                           Number of Observations Used          52
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  45
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       19     680.2587027      35.8030896     243.32    <.0001
+
+                     Error                       32       4.7085300       0.1471416                     
+
+                     Corrected Total             51     684.9672327                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.993126      1.607498      0.383590      23.86258
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4     139.9498468      34.9874617     237.78    <.0001
+                     sirna                        1       0.5924890       0.5924890       4.03    0.0533
+                     repeat*sirna                 4       3.5833397       0.8958349       6.09    0.0009
+                     detect                       1     482.9738957     482.9738957    3282.38    <.0001
+                     repeat*detect                4      52.8199432      13.2049858      89.74    <.0001
+                     sirna*detect                 1       0.1267000       0.1267000       0.86    0.3604
+                     repeat*sirna*detect          4       0.2124884       0.0531221       0.36    0.8344
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4     140.2798494      35.0699623     238.34    <.0001
+                     sirna                        1       0.3929125       0.3929125       2.67    0.1120
+                     repeat*sirna                 4       3.5833397       0.8958349       6.09    0.0009
+                     detect                       1     471.7340007     471.7340007    3205.99    <.0001
+                     repeat*detect                4      52.4448196      13.1112049      89.11    <.0001
+                     sirna*detect                 1       0.0961431       0.0961431       0.65    0.4249
+                     repeat*sirna*detect          4       0.2124884       0.0531221       0.36    0.8344
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  46
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    SIRT1       27.4304500           1
+                                       CavsiRNA    GAPDH       21.0078000           2
+                                       ConsiRNA    SIRT1       27.1573000           3
+                                       ConsiRNA    GAPDH       20.9154500           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    41.85878      1.727067      41.19289
+                                                          <.0001        0.3268        <.0001
+                                   2      -41.8588                    -38.8819      0.583908
+                                            <.0001                      <.0001        0.9362
+                                   3      -1.72707      38.88192                    38.35389
+                                            0.3268        <.0001                      <.0001
+                                   4      -41.1929      -0.58391      -38.3539              
+                                            <.0001        0.9362        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    SIRT1        27.430450       27.209451    27.651449
+                               CavsiRNA    GAPDH        21.007800       20.786801    21.228799
+                               ConsiRNA    SIRT1        27.157300       26.922896    27.391704
+                               ConsiRNA    GAPDH        20.915450       20.681046    21.149854
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2        6.422650        6.006936     6.838364
+                                     1    3        0.273150       -0.155358     0.701658
+                                     1    4        6.515000        6.086492     6.943508
+                                     2    3       -6.149500       -6.578008    -5.720992
+                                     2    4        0.092350       -0.336158     0.520858
+                                     3    4        6.241850        5.800919     6.682781
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  47
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+      Contrast                                                 DF     Contrast SS     Mean Square    F Value    Pr > F
+
+      Treatment and Gene Effect for SIRT1 all 5 repeats         1      0.09614306      0.09614306       0.65    0.4249
+
+
+                                                                                   Standard
+          Parameter                                                Estimate           Error    t Value    Pr > |t|
+
+          Treatment and Gene Effect for SIRT1 all 5 repeats      0.18080000      0.22366969       0.81      0.4249
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  48
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             3    1 2 4             
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    SIRT1 GAPDH       
+
+
+                                           Number of Observations Read          28
+                                           Number of Observations Used          28
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  49
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       11     526.7119025      47.8829002     521.13    <.0001
+
+                     Error                       16       1.4701162       0.0918823                     
+
+                     Corrected Total             27     528.1820187                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.997217      1.254836      0.303121      24.15621
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2      90.4994691      45.2497345     492.48    <.0001
+                     sirna                        1       0.4007385       0.4007385       4.36    0.0531
+                     repeat*sirna                 2       0.4958770       0.2479385       2.70    0.0978
+                     detect                       1     429.4442263     429.4442263    4673.85    <.0001
+                     repeat*detect                2       5.6945609       2.8472805      30.99    <.0001
+                     sirna*detect                 1       0.1065552       0.1065552       1.16    0.2975
+                     repeat*sirna*detect          2       0.0704755       0.0352377       0.38    0.6876
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2      90.1994980      45.0997490     490.84    <.0001
+                     sirna                        1       0.2896864       0.2896864       3.15    0.0948
+                     repeat*sirna                 2       0.4958770       0.2479385       2.70    0.0978
+                     detect                       1     414.0230583     414.0230583    4506.02    <.0001
+                     repeat*detect                2       5.5291792       2.7645896      30.09    <.0001
+                     sirna*detect                 1       0.1256321       0.1256321       1.37    0.2594
+                     repeat*sirna*detect          2       0.0704755       0.0352377       0.38    0.6876
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  50
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    SIRT1       28.1536667           1
+                                       CavsiRNA    GAPDH       20.0619167           2
+                                       ConsiRNA    SIRT1       28.2255000           3
+                                       ConsiRNA    GAPDH       20.4108333           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    50.64981      -0.42871      46.21032
+                                                          <.0001        0.9727        <.0001
+                                   2      -50.6498                    -48.7214      -2.08238
+                                            <.0001                      <.0001        0.2007
+                                   3      0.428711      48.72141                    44.65347
+                                            0.9727        <.0001                      <.0001
+                                   4      -46.2103      2.082384      -44.6535              
+                                            <.0001        0.2007        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    SIRT1        28.153667       27.914188    28.393145
+                               CavsiRNA    GAPDH        20.061917       19.822438    20.301395
+                               ConsiRNA    SIRT1        28.225500       27.963165    28.487835
+                               ConsiRNA    GAPDH        20.410833       20.148498    20.673169
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2        8.091750        7.634681     8.548819
+                                     1    3       -0.071833       -0.551212     0.407545
+                                     1    4        7.742833        7.263455     8.222212
+                                     2    3       -8.163583       -8.642962    -7.684205
+                                     2    4       -0.348917       -0.828295     0.130462
+                                     3    4        7.814667        7.313972     8.315361
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  51
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+    Contrast                                                      DF     Contrast SS     Mean Square    F Value    Pr > F
+
+    Treatment and Gene Effect for SIRT1 3 selected repeats         1      0.12563210      0.12563210       1.37    0.2594
+
+
+                                                                                      Standard
+        Parameter                                                     Estimate           Error    t Value    Pr > |t|
+
+        Treatment and Gene Effect for SIRT1 3 selected repeats      0.27708333      0.23696049       1.17      0.2594
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  52
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             5    1 2 3 4 5         
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    SIRT3 GAPDH       
+
+
+                                           Number of Observations Read          52
+                                           Number of Observations Used          52
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  53
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       19     1546.150169       81.376325     793.49    <.0001
+
+                     Error                       32        3.281758        0.102555                     
+
+                     Corrected Total             51     1549.431927                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.997882      1.246701      0.320242      25.68715
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4      272.394617       68.098654     664.02    <.0001
+                     sirna                        1        0.005748        0.005748       0.06    0.8144
+                     repeat*sirna                 4        1.542658        0.385664       3.76    0.0129
+                     detect                       1     1234.389410     1234.389410    12036.4    <.0001
+                     repeat*detect                4       36.539874        9.134969      89.07    <.0001
+                     sirna*detect                 1        0.114222        0.114222       1.11    0.2992
+                     repeat*sirna*detect          4        1.163640        0.290910       2.84    0.0404
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       4      268.632573       67.158143     654.85    <.0001
+                     sirna                        1        0.011655        0.011655       0.11    0.7382
+                     repeat*sirna                 4        1.542658        0.385664       3.76    0.0129
+                     detect                       1     1193.336489     1193.336489    11636.1    <.0001
+                     repeat*detect                4       36.489519        9.122380      88.95    <.0001
+                     sirna*detect                 1        0.043597        0.043597       0.43    0.5191
+                     repeat*sirna*detect          4        1.163640        0.290910       2.84    0.0404
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  54
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    SIRT3       31.0183500           1
+                                       CavsiRNA    GAPDH       21.0078000           2
+                                       ConsiRNA    SIRT3       31.0477500           3
+                                       ConsiRNA    GAPDH       20.9154500           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    78.14832      -0.22266      76.51442
+                                                          <.0001        0.9960        <.0001
+                                   2      -78.1483                    -76.0377      0.699414
+                                            <.0001                      <.0001        0.8965
+                                   3      0.222661      76.03767                    74.57504
+                                            0.9960        <.0001                      <.0001
+                                   4      -76.5144      -0.69941       -74.575              
+                                            <.0001        0.8965        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    SIRT3        31.018350       30.833848    31.202852
+                               CavsiRNA    GAPDH        21.007800       20.823298    21.192302
+                               ConsiRNA    SIRT3        31.047750       30.852057    31.243443
+                               ConsiRNA    GAPDH        20.915450       20.719757    21.111143
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2       10.010550        9.663489    10.357611
+                                     1    3       -0.029400       -0.387142     0.328342
+                                     1    4       10.102900        9.745158    10.460642
+                                     2    3      -10.039950      -10.397692    -9.682208
+                                     2    4        0.092350       -0.265392     0.450092
+                                     3    4       10.132300        9.764187    10.500413
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  55
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+      Contrast                                                 DF     Contrast SS     Mean Square    F Value    Pr > F
+
+      Treatment and Gene Effect for SIRT3 all 5 repeats         1      0.04359724      0.04359724       0.43    0.5191
+
+
+                                                                                   Standard
+          Parameter                                                Estimate           Error    t Value    Pr > |t|
+
+          Treatment and Gene Effect for SIRT3 all 5 repeats     -0.12175000      0.18673158      -0.65      0.5191
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  56
+
+                                                      The GLM Procedure
+
+                                                  Class Level Information
+ 
+                                         Class         Levels    Values
+
+                                         repeat             3    1 2 4             
+
+                                         sirna              2    CavsiRNA ConsiRNA 
+
+                                         detect             2    SIRT3 GAPDH       
+
+
+                                           Number of Observations Read          28
+                                           Number of Observations Used          28
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  57
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+                                                             Sum of
+                     Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+                     Model                       11     761.4069207      69.2188110     912.71    <.0001
+
+                     Error                       16       1.2134160       0.0758385                     
+
+                     Corrected Total             27     762.6203367                                     
+
+
+                                     R-Square     Coeff Var      Root MSE       ct Mean
+
+                                     0.998409      1.102791      0.275388      24.97189
+
+
+                     Source                      DF       Type I SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2     111.2611018      55.6305509     733.54    <.0001
+                     sirna                        1       0.3209091       0.3209091       4.23    0.0564
+                     repeat*sirna                 2       0.0179201       0.0089600       0.12    0.8893
+                     detect                       1     626.9616080     626.9616080    8267.06    <.0001
+                     repeat*detect                2      22.4186410      11.2093205     147.81    <.0001
+                     sirna*detect                 1       0.1544323       0.1544323       2.04    0.1728
+                     repeat*sirna*detect          2       0.2723084       0.1361542       1.80    0.1980
+
+
+                     Source                      DF     Type III SS     Mean Square    F Value    Pr > F
+
+                     repeat                       2     110.0628385      55.0314192     725.64    <.0001
+                     sirna                        1       0.3199277       0.3199277       4.22    0.0567
+                     repeat*sirna                 2       0.0179201       0.0089600       0.12    0.8893
+                     detect                       1     619.0828916     619.0828916    8163.17    <.0001
+                     repeat*detect                2      22.5482074      11.2741037     148.66    <.0001
+                     sirna*detect                 1       0.1069616       0.1069616       1.41    0.2523
+                     repeat*sirna*detect          2       0.2723084       0.1361542       1.80    0.1980
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  58
+
+                                                      The GLM Procedure
+                                                     Least Squares Means
+                                      Adjustment for Multiple Comparisons: Tukey-Kramer
+
+                                                                               LSMEAN
+                                       sirna       detect       ct LSMEAN      Number
+
+                                       CavsiRNA    SIRT3       29.9150833           1
+                                       CavsiRNA    GAPDH       20.0619167           2
+                                       ConsiRNA    SIRT3       30.0083333           3
+                                       ConsiRNA    GAPDH       20.4108333           4
+
+
+                                        Least Squares Means for Effect sirna*detect
+                                          t for H0: LSMean(i)=LSMean(j) / Pr > |t|
+                                                              
+                                                   Dependent Variable: ct
+ 
+                                i/j              1             2             3             4
+
+                                   1                    67.88631      -0.61257      62.43497
+                                                          <.0001        0.9266        <.0001
+                                   2      -67.8863                    -65.3396      -2.29209
+                                            <.0001                      <.0001        0.1415
+                                   3      0.612574      65.33963                    60.36343
+                                            0.9266        <.0001                      <.0001
+                                   4       -62.435       2.29209      -60.3634              
+                                            <.0001        0.1415        <.0001              
+
+
+                               sirna       detect       ct LSMEAN      95% Confidence Limits
+
+                               CavsiRNA    SIRT3        29.915083       29.697515    30.132651
+                               CavsiRNA    GAPDH        20.061917       19.844349    20.279485
+                               ConsiRNA    SIRT3        30.008333       29.769999    30.246667
+                               ConsiRNA    GAPDH        20.410833       20.172499    20.649167
+
+
+                                         Least Squares Means for Effect sirna*detect
+ 
+                                                 Difference         Simultaneous 95%
+                                                    Between      Confidence Limits for
+                                     i    j           Means       LSMean(i)-LSMean(j)
+
+                                     1    2        9.853167        9.437915    10.268418
+                                     1    3       -0.093250       -0.528769     0.342269
+                                     1    4        9.504250        9.068731     9.939769
+                                     2    3       -9.946417      -10.381936    -9.510897
+                                     2    4       -0.348917       -0.784436     0.086603
+                                     3    4        9.597500        9.142615    10.052385
+                                                       The SAS System                   14:31 Saturday, December 23, 2023  59
+
+                                                      The GLM Procedure
+ 
+                                                  Dependent Variable: ct   
+
+    Contrast                                                      DF     Contrast SS     Mean Square    F Value    Pr > F
+
+    Treatment and Gene Effect for SIRT3 3 selected repeats         1      0.10696164      0.10696164       1.41    0.2523
+
+
+                                                                                      Standard
+        Parameter                                                     Estimate           Error    t Value    Pr > |t|
+
+        Treatment and Gene Effect for SIRT3 3 selected repeats      0.25566667      0.21528063       1.19      0.2523

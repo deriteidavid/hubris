@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d5" for="node" attr.name="font_size" attr.type="long"/>
+<key id="d4" for="node" attr.name="height" attr.type="long"/>
+<key id="d3" for="node" attr.name="width" attr.type="long"/>
+<key id="d2" for="node" attr.name="font_color" attr.type="string"/>
+<key id="d1" for="node" attr.name="color" attr.type="string"/>
+<key id="d0" for="node" attr.name="name" attr.type="string"/>
+<graph edgedefault="undirected"><node id="HHIP">
+  <data key="d0">HHIP</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="MMP9">
+  <data key="d0">MMP9</data>
+  <data key="d1">#1a53ff</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="MMP1">
+  <data key="d0">MMP1</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="HSPA1A">
+  <data key="d0">HSPA1A</data>
+  <data key="d1">#1a53ff</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="TET2">
+  <data key="d0">TET2</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="TP53">
+  <data key="d0">TP53</data>
+  <data key="d1">#1a53ff</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="EEF1A1">
+  <data key="d0">EEF1A1</data>
+  <data key="d1">#1a53ff</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="APPBP2">
+  <data key="d0">APPBP2</data>
+  <data key="d1">#ffffff</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="FBLN5">
+  <data key="d0">FBLN5</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="ASPH">
+  <data key="d0">ASPH</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="MAP4">
+  <data key="d0">MAP4</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="DSP">
+  <data key="d0">DSP</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="RRBP1">
+  <data key="d0">RRBP1</data>
+  <data key="d1">#ffcc00</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<edge source="HHIP" target="MMP9"/>
+<edge source="HHIP" target="HSPA1A"/>
+<edge source="HHIP" target="TP53"/>
+<edge source="HHIP" target="EEF1A1"/>
+<edge source="HHIP" target="APPBP2"/>
+<edge source="HHIP" target="ASPH"/>
+<edge source="HHIP" target="MAP4"/>
+<edge source="HHIP" target="RRBP1"/>
+<edge source="MMP9" target="MMP1"/>
+<edge source="HSPA1A" target="TET2"/>
+<edge source="HSPA1A" target="DSP"/>
+<edge source="TET2" target="TP53"/>
+<edge source="TET2" target="EEF1A1"/>
+<edge source="TP53" target="DSP"/>
+<edge source="EEF1A1" target="DSP"/>
+<edge source="APPBP2" target="FBLN5"/>
+<edge source="FBLN5" target="ASPH"/>
+<edge source="MAP4" target="DSP"/>
+<edge source="DSP" target="RRBP1"/>
+</graph></graphml>
