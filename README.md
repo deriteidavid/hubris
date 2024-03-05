@@ -1,3 +1,9 @@
+# Running all scripts
+
+To run the Python scripts reproducing the network analysis results published in the paper run the bash script: 
+
+run_all_scirpts_in_sequence.sh
+
 # Running scripts individually 
 
 To reproduce the results of the paper you need to run the scripts in the following order from a terminal: 
