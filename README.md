@@ -1,3 +1,12 @@
+This repository contains code and data for the manuscript entitled: 
+# HHIP protein interactions in lung cells provide insight into COPD pathogenesis
+
+Available on BioRxiv: 
+https://www.biorxiv.org/content/10.1101/2024.04.01.586839v1  
+
+## Abstract 
+Chronic obstructive pulmonary disease (COPD) is the third leading cause of death worldwide. The primary causes of COPD are environmental, including cigarette smoking; however, genetic susceptibility also contributes to COPD risk. Genome-Wide Association Studies (GWASes) have revealed more than 80 genetic loci associated with COPD, leading to the identification of multiple COPD GWAS genes. However, the biological relationships between the identified COPD susceptibility genes are largely unknown. Genes associated with a complex disease are often in close network proximity, i.e. their protein products often interact directly with each other and/or similar proteins. In this study, we use affinity purification mass spectrometry (AP-MS) to identify protein interactions with HHIP, a well-established COPD GWAS gene which is part of the sonic hedgehog pathway, in two disease-relevant lung cell lines (IMR90 and 16HBE). To better understand the network neighborhood of HHIP, its proximity to the protein products of other COPD GWAS genes, and its functional role in COPD pathogenesis, we create HUBRIS, a protein-protein interaction network compiled from 8 publicly available databases. We identified both common and cell type-specific protein-protein interactors of HHIP. We find that our newly identified interactions shorten the network distance between HHIP and the protein products of several COPD GWAS genes, including DSP, MFAP2, TET2, and FBLN5. These new shorter paths include proteins that are encoded by genes involved in extracellular matrix and tissue organization. We found and validated interactions to proteins that provide new insights into COPD pathobiology, including CAVIN1 (IMR90) and TP53 (16HBE). The newly discovered HHIP interactions with CAVIN1 and TP53 implicate HHIP in response to oxidative stress.
+
 # Running all scripts
 
 To run the Python scripts reproducing the network analysis results published in the paper run the bash script: 
@@ -5,7 +14,9 @@ To run the Python scripts reproducing the network analysis results published in 
 run_all_scirpts_in_sequence.sh
 
 # Running scripts individually 
-In this section we document the individual scripts needed to create the HUBRIS networks, the different cell-type specific versions, and the related analyses. 
+The documentation of the code is in progress, please contact the authors if you have any questions at david.deritei@channing.harvard.edu
+
+This section documents the individual scripts needed to create the HUBRIS networks, the different cell-type-specific versions, and the related analyses. 
 
 1. __python process\_SAINTExpress\_output\_excels.py__ <br>
     * __Aim__: Process the output files of the SAINTExpress analysis (HHIP\_SAINTexpress\_consolidated.xlsx), which consolidates the raw AP-MS interaction data into statistically significant interactions. The goal is to have a simplified list of interactions for the different cases (celly type, CRAPome etc.), which also constitutes the input for later network analysis scripts.
