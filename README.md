@@ -16,34 +16,43 @@ In this section we document the individual scripts needed to create the HUBRIS n
 2. __python RNASeq\_based\_filtering.py__ 
     * __Aim__: Determine which genes are expressed in the two cell lines (IMR90, 16HBE) based on RNA-Seq data.
     * __Input files__: rnaseq\_PPI\_GWAS/imr90/gene\_count.xlsx;  rnaseq\_PPI\_GWAS/imr90/gene\_fpkm\_group.xlsx;  rnaseq\_PPI\_GWAS/16hbe/gene\_count.xlsx; rnaseq\_PPI\_GWAS/16hbe/gene\_fpkm\_group.xlsx
+    * __Key parameter(s)__: expression_threshold (default = 0.25)
     * __Std output__: -
     * __Output Files__:IMR90_RNASeq_genes_expressed.csv; 16HBE_RNASeq_genes_expressed.csv; <br>
-    Figures: CR_outputs/RNASeq_IMR90.png; CR_outputs/RNASeq_16HBE.png
-    * __Key parameter(s)__: expression_threshold (default = 0.25)
+    Figures: CR_outputs/RNASeq_IMR90.png; CR_outputs/RNASeq_16HBE.png (__Supplementary Figure S12__)
+
 
 3. __python create\_HUBRIS.py__
     * __Aim__: Generate the HUBRIS network by either re-downloading the constituent databases or using existing downloads. This script also does the conversion between ID-s (using biorosetta) and the merging of the networks
     * __Input files__: - databases.xlsx (config file of the databases, it may require an update if the databases a re-downloaded); <br>
                        - hgnc_mapping.tsv (id mapping from  https://www.genenames.org/download/statistics-and-files/). <br>
                        -(optional) db_local_files/* - database local files, file names configured in databases.xlsx
+    * __Key parameter(s)__: - re_download (default = False): should the databases be re-downloaded? If False the ones specified in the database config excel will be used. <br> 
+                      - to_download (default = ['HumanNet','HIPPIE','BioGrid','NCBI','StringDB','Interactome3D','HURI','Reactome']): which databases should be downloaded (if re_download == True)<br>
+                      - to_merge (default = to_download): which databases should be merged into the HUBRIS network? <br>
+                      - consensus_id_type (default = 'entr'): he consensus id type to which all dbs (which are not already in it) will be converted before merging <br>
+                      - db_count_threshold (default=2) minimum number of databases containing an edge for the edge to be kept in the final HUBRIS network
     * __Std output__: progress report; network statistics
     * __Output Files__: G_merged_raw.gpickle; G_hubris.gpickle <br>
-                        Figures: CR_outputs/HUBRIS_db_analytics.png (Supplementary Figure S11)
-    * __Key parameter(s)__: - re_download (default = False): should the databases be re-downloaded? If False the ones specified in the database config excel will be used. <br> 
-                            - to_download (default = ['HumanNet','HIPPIE','BioGrid','NCBI','StringDB','Interactome3D','HURI','Reactome']): which databases should be downloaded (if re_download == True)<br>
-                            - to_merge (default = to_download): which databases should be merged into the HUBRIS network? <br>
-                            - consensus_id_type (default = 'entr'): he consensus id type to which all dbs (which are not already in it) will be converted before merging <br>
-                            - db_count_threshold (default=2) minimum number of databases containing an edge for the edge to be kept in the final HUBRIS network
+                        Figures: CR_outputs/HUBRIS_db_analytics.png (__Supplementary Figure S11__)
 
-Necessary input files: 
 
-In script parameters:
 
-re\_download=False (default) to\_download=\['HumanNet','HIPPIE','BioGrid','NCBI','StringDB','Interactome3D','HURI','Reactome']
+4. __python generate\_HHIP\_ego\_networks.py *cell_line filter_crapome filter_networks_based_on_expression*__
+    * __Aim__: Generate the "ego" network of HHIP based on HUBRIS and our newly identified edges. 
+    * __Input files__: - G_hubris.gpickle <br>
+                       - all_significant_links_HHIP.xlsx <br>
+                       - (optional) RNASeq_lists/*cell_line*_RNASeq_genes_expressed.csv
+    * __Key parameter(s)__: - cell_line (str, options:'intersection', 'union', 'IMR90', '16HBE'): which cell line's data to use (interactions and RNA-Seq)<br>
+                            - filter_crapome (bool), filter_networks_based_on_expression (bool, options: True= SAINTExpress interactions with CRAPome priors; False= without CRAPOME priors) <br>
+                            - filter_networks_based_on_expression (bool, options: True = filter the network based on RNA-Seq expression; False = no filtering)
+    * __Std output__: progress report; network statistics
+    * __Output Files__: 
 
-python generate\_HHIP\_ego\_networks.py union 1 1
 
-python shorthest\_path\_analysis.py IMR90 1 1 
+
+
+6. __python shorthest\_path\_analysis.py IMR90 1 1__
 
 python shorthest\_path\_analysis.py 16HBE 1 1 
 
