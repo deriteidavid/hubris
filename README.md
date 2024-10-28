@@ -5,28 +5,37 @@ To run the Python scripts reproducing the network analysis results published in 
 run_all_scirpts_in_sequence.sh
 
 # Running scripts individually 
+In this section we document the individual scripts needed to create the HUBRIS networks, the different cell-type specific versions, and the related analyses. 
 
-To reproduce the results of the paper you need to run the scripts in the following order from a terminal: 
+1. __python process\_SAINTExpress\_output\_excels.py__ <br>
+    * __Aim__: Process the output files of the SAINTExpress analysis (HHIP\_SAINTexpress\_consolidated.xlsx), which consolidates the raw AP-MS interaction data into statistically significant interactions. The goal is to have a simplified list of interactions for the different cases (celly type, CRAPome etc.), which also constitutes the input for later network analysis scripts.
+    * __Input files__: HHIP\_SAINTexpress\_consolidated.xlsx <br>
+    * __Std output__: list of statistically significant interactions on the standard output for all cases (cell type, CRAPome (yes/no)) <br>
+    * __Output Files__: all_significant_links_HHIP.xlsx; Supplementary_Table_S1_all_significant_links_HHIP.xlsx <br> 
 
-python process\_SAINTExpress\_output\_excels.py 
+2. __python RNASeq\_based\_filtering.py__ 
+    * __Aim__: Determine which genes are expressed in the two cell lines (IMR90, 16HBE) based on RNA-Seq data.
+    * __Input files__: rnaseq\_PPI\_GWAS/imr90/gene\_count.xlsx;  rnaseq\_PPI\_GWAS/imr90/gene\_fpkm\_group.xlsx;  rnaseq\_PPI\_GWAS/16hbe/gene\_count.xlsx; rnaseq\_PPI\_GWAS/16hbe/gene\_fpkm\_group.xlsx
+    * __Std output__: -
+    * __Output Files__:IMR90_RNASeq_genes_expressed.csv; 16HBE_RNASeq_genes_expressed.csv; <br>
+    Figures: CR_outputs/RNASeq_IMR90.png; CR_outputs/RNASeq_16HBE.png
+    * __Key parameter(s)__: expression_threshold (default = 0.25)
 
-Necessary input file: HHIP\_SAINTexpress\_consolidated.xlsx
+3. __python create\_HUBRIS.py__
+    * __Aim__: Generate the HUBRIS network by either re-downloading the constituent databases or using existing downloads. This script also does the conversion between ID-s (using biorosetta) and the merging of the networks
+    * __Input files__: - databases.xlsx (config file of the databases, it may require an update if the databases a re-downloaded); <br>
+                       - hgnc_mapping.tsv (id mapping from  https://www.genenames.org/download/statistics-and-files/). <br>
+                       -(optional) db_local_files/* - database local files, file names configured in databases.xlsx
+    * __Std output__: progress report; network statistics
+    * __Output Files__: G_merged_raw.gpickle; G_hubris.gpickle <br>
+                        Figures: CR_outputs/HUBRIS_db_analytics.png (Supplementary Figure S11)
+    * __Key parameter(s)__: - re_download (default = False): should the databases be re-downloaded? If False the ones specified in the database config excel will be used. <br> 
+                            - to_download (default = ['HumanNet','HIPPIE','BioGrid','NCBI','StringDB','Interactome3D','HURI','Reactome']): which databases should be downloaded (if re_download == True)<br>
+                            - to_merge (default = to_download): which databases should be merged into the HUBRIS network? <br>
+                            - consensus_id_type (default = 'entr'): he consensus id type to which all dbs (which are not already in it) will be converted before merging <br>
+                            - db_count_threshold (default=2) minimum number of databases containing an edge for the edge to be kept in the final HUBRIS network
 
-&#x20;        HHIP\_CRAPome\_SAINTexpress\_consolidated.xlsx
-
-python RNASeq\_based\_filtering.py
-
-Necessary input files: rnaseq\_PPI\_GWAS/imr90/gene\_count.xlsx
-
- rnaseq\_PPI\_GWAS/imr90/gene\_fpkm\_group.xlsx
-
- rnaseq\_PPI\_GWAS/16hbe/gene\_count.xlsx 
-
- rnaseq\_PPI\_GWAS/16hbe/gene\_fpkm\_group.xlsx 
-
-python create\_HUBRIS.py
-
-Necessary input files: databases.xlsx 
+Necessary input files: 
 
 In script parameters:
 
