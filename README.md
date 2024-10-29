@@ -11,7 +11,7 @@ Chronic obstructive pulmonary disease (COPD) is the third leading cause of death
 
 To run the Python scripts reproducing the network analysis results published in the paper run the bash script: 
 
-run_all_scirpts_in_sequence.sh
+__run_all_scirpts_in_sequence.sh__
 
 # Running scripts individually 
 The documentation of the code is in progress, please contact the authors if you have any questions at david.deritei@channing.harvard.edu
@@ -50,12 +50,12 @@ This section documents the individual scripts needed to create the HUBRIS networ
 
 
 4. __generate\_HHIP\_ego\_networks.py__
-    * __Aim__: Generate different variations of the "ego" network of HHIP based on HUBRIS and our newly identified edges. 
+    * __Aim__: Generate different variations of the "ego" network of HHIP based on HUBRIS and our newly identified edges. The script also determines whether the newly identified edges create new shorter paths between HHIP and the other GWAS genes. <br>
     * __Input files__: - G_hubris.gpickle <br>
                        - all_significant_links_HHIP.xlsx <br>
                        - (optional) RNASeq_lists/*cell_line*_RNASeq_genes_expressed.csv
     * __Key parameter(s)__: - cell_line (str, options:'intersection', 'union', 'IMR90', '16HBE'): which cell line's data to use (interactions and RNA-Seq)<br>
-                            - filter_crapome (bool), filter_networks_based_on_expression (bool, options: True= SAINTExpress interactions with CRAPome priors; False= without CRAPOME priors) <br>
+                            - filter_crapome (bool, options: True= SAINTExpress interactions with CRAPome priors; False= without CRAPOME priors) <br>
                             - filter_networks_based_on_expression (bool, options: True = filter the network based on RNA-Seq expression; False = no filtering)
     * __Std output__: progress report; network statistics
     * __Output Files__: CR_outputs/G_ego_HUBRIS_only_cell_type_%s_expression_%s.graphml %(cell_line,str(int(filter_networks_based_on_expression)))) (the figure for the HUBRIS-only ego network of HHIP) <br>
@@ -66,7 +66,21 @@ This section documents the individual scripts needed to create the HUBRIS networ
                    - __python generate_HHIP_ego_networks.py union 0 1__ --> G_ego_plot_cell_type_union_crapome_0_expression_1.graphml (__Supplementary Figure S2__) <br>
    
 5. __shorthest\_path\_analysis.py__
-   
+    * __Aim__: Find shortest paths in the different variations of the HUBRIS networks (cell type-specific, with and without new experimental edges) between HHIP and a set of other COPD GWAS gene products.
+    * __Input files__: - G_hubris.gpickle <br>
+                       - all_significant_links_HHIP.xlsx <br>
+                       - (optional) RNASeq_lists/*cell_line*_RNASeq_genes_expressed.csv
+    * __Key parameter(s)__: - cell_line (str, options:'intersection', 'union', 'IMR90', '16HBE'): which cell line's data to use (interactions and RNA-Seq)<br>
+                            - filter_crapome (bool, options: True= SAINTExpress interactions with CRAPome priors; False= without CRAPOME priors) <br>
+                            - filter_networks_based_on_expression (bool, options: True = filter the network based on RNA-Seq expression; False = no filtering)<br>
+                            - copd_gwas_genes (list, default = ['FAM13A','IREB2','DSP','AGER','MFAP2','FBLN5','NPNT','FBXO38','SFTPD','TET2','TGFB2','MMP12','MMP1']<br>
+    * __Std output__: progress report; network statistics
+    * __Output Files__:'CR_outputs/hubris_sps_cell_type_%s_crapome_%s_expression_%s.pdf'%(cell_line,str(int(filter_crapome)),str(int(filter_networks_based_on_expression)))  (shortest path comparisons with and without the new edges)<br>
+                       'CR_outputs/G_hubris_seleted_sp_cell_type_%s_crapome_%s_expression_%s.graphml'%(cell_line,str(int(filter_crapome)),str(int(filter_networks_based_on_expression))) (graph of specific shortest paths) <br>
+    * __Specific use-cases:__ The parameters __cell_line__, __filter_crapome__ and __filter_networks_based_on_expression__ and be specified as command line arguments (in this order), this way it's easier to generate the different use cases we disscus below: <br>
+                   - __python generate_HHIP_ego_networks.py union 1 1__ --> G_ego_HUBRIS_only_cell_type_union_expression_1.graphml (__Figure 1__) <br>
+                                                                        --> G_ego_HUBRIS_only_cell_type_union_expression_1.graphml (__Figure 3__) <br>
+                   - __python generate_HHIP_ego_networks.py union 0 1__ --> G_ego_plot_cell_type_union_crapome_0_expression_1.graphml (__Supplementary Figure S2__) <br>
 
 
 7. __python shorthest\_path\_analysis.py IMR90 1 1__
