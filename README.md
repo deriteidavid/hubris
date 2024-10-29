@@ -18,13 +18,13 @@ The documentation of the code is in progress, please contact the authors if you 
 
 This section documents the individual scripts needed to create the HUBRIS networks, the different cell-type-specific versions, and the related analyses. 
 
-1. __python process\_SAINTExpress\_output\_excels.py__ <br>
+1. __process\_SAINTExpress\_output\_excels.py__ <br>
     * __Aim__: Process the output files of the SAINTExpress analysis (HHIP\_SAINTexpress\_consolidated.xlsx), which consolidates the raw AP-MS interaction data into statistically significant interactions. The goal is to have a simplified list of interactions for the different cases (celly type, CRAPome etc.), which also constitutes the input for later network analysis scripts.
     * __Input files__: HHIP\_SAINTexpress\_consolidated.xlsx <br>
     * __Std output__: list of statistically significant interactions on the standard output for all cases (cell type, CRAPome (yes/no)) <br>
     * __Output Files__: all_significant_links_HHIP.xlsx; Supplementary_Table_S1_all_significant_links_HHIP.xlsx <br> 
 
-2. __python RNASeq\_based\_filtering.py__ 
+2. __RNASeq\_based\_filtering.py__ 
     * __Aim__: Determine which genes are expressed in the two cell lines (IMR90, 16HBE) based on RNA-Seq data.
     * __Input files__: rnaseq\_PPI\_GWAS/imr90/gene\_count.xlsx;  rnaseq\_PPI\_GWAS/imr90/gene\_fpkm\_group.xlsx;  rnaseq\_PPI\_GWAS/16hbe/gene\_count.xlsx; rnaseq\_PPI\_GWAS/16hbe/gene\_fpkm\_group.xlsx
     * __Key parameter(s)__: expression_threshold (default = 0.25)
@@ -33,7 +33,7 @@ This section documents the individual scripts needed to create the HUBRIS networ
     Figures: CR_outputs/RNASeq_IMR90.png; CR_outputs/RNASeq_16HBE.png (__Supplementary Figure S12__)
 
 
-3. __python create\_HUBRIS.py__
+3. __create\_HUBRIS.py__
     * __Aim__: Generate the HUBRIS network by either re-downloading the constituent databases or using existing downloads. This script also does the conversion between ID-s (using biorosetta) and the merging of the networks
     * __Input files__: - databases.xlsx (config file of the databases, it may require an update if the databases a re-downloaded); <br>
                        - hgnc_mapping.tsv (id mapping from  https://www.genenames.org/download/statistics-and-files/). <br>
@@ -45,12 +45,12 @@ This section documents the individual scripts needed to create the HUBRIS networ
                       - db_count_threshold (default=2) minimum number of databases containing an edge for the edge to be kept in the final HUBRIS network
     * __Std output__: progress report; network statistics
     * __Output Files__: G_merged_raw.gpickle; G_hubris.gpickle <br>
-                        Figures: CR_outputs/HUBRIS_db_analytics.png (__Supplementary Figure S11__)
+                        Figures: CR_outputs/HUBRIS_db_analytics.png (__Supplementary Figure S11__ )
 
 
 
-4. __python generate\_HHIP\_ego\_networks.py *cell_line filter_crapome filter_networks_based_on_expression*__
-    * __Aim__: Generate the "ego" network of HHIP based on HUBRIS and our newly identified edges. 
+4. __generate\_HHIP\_ego\_networks.py__
+    * __Aim__: Generate different variations of the "ego" network of HHIP based on HUBRIS and our newly identified edges. 
     * __Input files__: - G_hubris.gpickle <br>
                        - all_significant_links_HHIP.xlsx <br>
                        - (optional) RNASeq_lists/*cell_line*_RNASeq_genes_expressed.csv
@@ -58,12 +58,18 @@ This section documents the individual scripts needed to create the HUBRIS networ
                             - filter_crapome (bool), filter_networks_based_on_expression (bool, options: True= SAINTExpress interactions with CRAPome priors; False= without CRAPOME priors) <br>
                             - filter_networks_based_on_expression (bool, options: True = filter the network based on RNA-Seq expression; False = no filtering)
     * __Std output__: progress report; network statistics
-    * __Output Files__: 
+    * __Output Files__: CR_outputs/G_ego_HUBRIS_only_cell_type_%s_expression_%s.graphml %(cell_line,str(int(filter_networks_based_on_expression)))) (the figure for the HUBRIS-only ego network of HHIP) <br>
+                        CR_outputs/G_ego_plot_cell_type_%s_crapome_%s_expression_%s.graphml'%(cell_line,str(int(filter_crapome)),str(int(filter_networks_based_on_expression)))) (HUBRIS + new interactions) <br>  
+    * __Specific use-cases:__ The parameters __cell_line__, __filter_crapome__ and __filter_networks_based_on_expression__ and be specified as command line arguments (in this order), this way it's easier to generate the different use cases we disscus below: <br>
+                   - __python generate_HHIP_ego_networks.py union 1 1__ --> G_ego_HUBRIS_only_cell_type_union_expression_1.graphml (__Figure 1__) <br>
+                                                                        --> G_ego_HUBRIS_only_cell_type_union_expression_1.graphml (__Figure 3__) <br>
+                   - __python generate_HHIP_ego_networks.py union 0 1__ --> G_ego_plot_cell_type_union_crapome_0_expression_1.graphml (__Supplementary Figure S2__) <br>
+   
+5. __shorthest\_path\_analysis.py__
+   
 
 
-
-
-6. __python shorthest\_path\_analysis.py IMR90 1 1__
+7. __python shorthest\_path\_analysis.py IMR90 1 1__
 
 python shorthest\_path\_analysis.py 16HBE 1 1 
 
