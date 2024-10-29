@@ -44,7 +44,7 @@ This section documents the individual scripts needed to create the HUBRIS networ
                       - consensus_id_type (default = 'entr'): he consensus id type to which all dbs (which are not already in it) will be converted before merging <br>
                       - db_count_threshold (default=2) minimum number of databases containing an edge for the edge to be kept in the final HUBRIS network
     * __Std output__: progress report; network statistics
-    * __Output Files__: G_merged_raw.gpickle; G_hubris.gpickle <br>
+    * __Output Files__: G_merged_raw.gpickle; G_hubris.gpickle; G_hubris.gml <br>
                         Figures: CR_outputs/HUBRIS_db_analytics.png (__Figure S11__ )
 
 
