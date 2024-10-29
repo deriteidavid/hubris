@@ -11,3 +11,4 @@ G_merged_raw.gpickle
 debuging_translations.ipynb
 .ipynb_checkpoints
 __pycache__
+HUBRIS_variations/*
