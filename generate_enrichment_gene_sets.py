@@ -37,6 +37,7 @@ G_hubris_og = G_hubris.copy()
 #dictionary and skip the lengthy calculations. If the network changed in any way it's worth recalcualting. 
 
 regenerate_gene_subsets = False
+save_HUBRIS_gmls = False
 
 if len(sys.argv)>1:
     
@@ -133,10 +134,14 @@ else:
         G_hubris_extended=G_hubris.copy()
         G_hubris_extended.add_edges_from(new_edges)
 
+        #We save the different HUBRIS variations
+        if save_HUBRIS_gmls:
+            nx.write_gml(G_hubris,'HUBRIS_variations/G_hubris_new_edges_0_cellline_%s_filter_crapome_%d_filter_expression_%d.gml'%(cell_line,int(filter_crapome),int(filter_networks_based_on_expression)),stringizer=str)
+            nx.write_gml(G_hubris_extended,'HUBRIS_variations/G_hubris_new_edges_1_cellline_%s_filter_crapome_%d_filter_expression_%d.gml'%(cell_line,int(filter_crapome),int(filter_networks_based_on_expression)),stringizer=str)
+
         #Next we generate the induced graph in each network between HHIP and the other COPD GWAS genes. 
         G_induced_hubris,hubris_sp_count_and_len=hf.induced_graph(G_hubris,'HHIP', copd_gwas_genes)
         G_induced_hubris_extended,hubris_extended_sp_count_and_len=hf.induced_graph(G_hubris_extended,'HHIP', copd_gwas_genes)
-
 
         #next we generate the graph that shows the highlighted shortest paths between HHIP and the other GWAS genes
 
