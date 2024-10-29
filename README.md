@@ -103,7 +103,8 @@ This section documents the individual scripts needed to create the HUBRIS networ
     * __Input files__: - G_hubris.gpickle <br>
                        - all_significant_links_HHIP.xlsx <br>
                        - RNASeq_lists/*cell_line*_RNASeq_genes_expressed.csv
-    * __Key parameter(s)__: - regenerate_gene_subsets (bool, default = False) 
+    * __Key parameter(s)__: - regenerate_gene_subsets (bool, default = False)
+                            - save_HUBRIS_gmls (bool, default = False)
                             - copd_gwas_genes (list, default = ['FAM13A','IREB2','DSP','AGER','MFAP2','FBLN5','NPNT','FBXO38','SFTPD','TET2','TGFB2','MMP12','MMP1']<br>
     * __Std output__: progress report; network statistics
     * __Output Files__:-gene_subset_variations_dict_for_functional_enrichment.pickle (pickled python dictionary of the 5 different gene sets generated for the 12 network variations) <br>
