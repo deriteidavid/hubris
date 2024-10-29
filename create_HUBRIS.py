@@ -106,6 +106,8 @@ G_hubris.remove_edges_from(single_source_edges)
 #we save the final network into a gpickle
 with open('G_hubris.gpickle', 'wb') as f:
     pickle.dump(G_hubris, f, pickle.HIGHEST_PROTOCOL)
+#we also save it into a gml 
+nx.write_gml(G_hubris,'G_hubris.gml',stringizer=str)
 
 print('After filtering: N=',G_hubris.number_of_nodes(),'E=',G_hubris.number_of_edges())
 
