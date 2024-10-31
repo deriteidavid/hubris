@@ -106,8 +106,9 @@ G_hubris.remove_edges_from(single_source_edges)
 #we save the final network into a gpickle
 with open('G_hubris.gpickle', 'wb') as f:
     pickle.dump(G_hubris, f, pickle.HIGHEST_PROTOCOL)
-#we also save it into a gml 
+#we also save it into a gml and edgelist
 nx.write_gml(G_hubris,'G_hubris.gml',stringizer=str)
+nx.write_edgelist(G_hubris,'G_hubris.txt')
 
 print('After filtering: N=',G_hubris.number_of_nodes(),'E=',G_hubris.number_of_edges())
 
@@ -115,6 +116,7 @@ G_hubris_LCC=G_hubris.subgraph(max(nx.connected_components(G_hubris), key=len))
 print('LCC: N=',G_hubris_LCC.number_of_nodes(), 'E=',G_hubris_LCC.number_of_edges())
 
 nx.write_gml(G_hubris_LCC,'G_hubris_lcc.gml',stringizer=str)
+nx.write_edgelist(G_hubris_LCC,'G_hubris_lcc.txt')
 
 # Plot HUBRIS stats as shown in the manuscript
 edge_dbs=[]
@@ -188,5 +190,5 @@ axs[1,1].set_title('Percentage of multi source (db support count>2) edges \n sha
 plt.rc('font', size=14)
 for (j,i),label in np.ndenumerate(db_e_count_ratios):
     axs[1,1].text(i,j,str(label*100)[:5],ha='center',va='center')
-plt.savefig('CR_outputs/HUBRIS_db_analytics.png')
+plt.savefig('HUBRIS_db_analytics.png')
 
