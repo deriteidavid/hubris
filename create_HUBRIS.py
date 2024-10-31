@@ -114,6 +114,8 @@ print('After filtering: N=',G_hubris.number_of_nodes(),'E=',G_hubris.number_of_e
 G_hubris_LCC=G_hubris.subgraph(max(nx.connected_components(G_hubris), key=len))
 print('LCC: N=',G_hubris_LCC.number_of_nodes(), 'E=',G_hubris_LCC.number_of_edges())
 
+nx.write_gml(G_hubris_LCC,'G_hubris_lcc.gml',stringizer=str)
+
 # Plot HUBRIS stats as shown in the manuscript
 edge_dbs=[]
 for e in single_source_edges:
