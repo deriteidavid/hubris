@@ -142,7 +142,7 @@ This section documents the individual scripts needed to create the HUBRIS networ
       * __Output Files__:CR_outputs/G_new_paths.graphml
         
 12. __highlighted\_pathway\_stats.py__
-    *__Aim__: Organize some of the  pathways highlighted in the manuscript's main text into a separate file.
+    * __Aim__: Organize some of the  pathways highlighted in the manuscript's main text into a separate file.
     * __Input files__ : Supplementary_Table_S3_New_paths_node_set.xlsx
     * __Output Files__: highlighted_pathways.xlsx
 
