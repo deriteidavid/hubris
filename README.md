@@ -64,7 +64,7 @@ This section documents the individual scripts needed to create the HUBRIS networ
                         CR_outputs/G_ego_plot_cell_type_%s_crapome_%s_expression_%s.graphml'%(cell_line,str(int(filter_crapome)),str(int(filter_networks_based_on_expression)))) (HUBRIS + new interactions) <br>  
     * __Specific use-cases:__ The parameters __cell_line__, __filter_crapome__ and __filter_networks_based_on_expression__ and be specified as command line arguments (in this order), this way it's easier to generate the different use cases we disscus below: <br>
                    - __python generate_HHIP_ego_networks.py union 1 1__ --> G_ego_HUBRIS_only_cell_type_union_expression_1.graphml (__Figure 1__) <br>
-                                                                        --> G_ego_HUBRIS_only_cell_type_union_expression_1.graphml (__Figure 3__) <br>
+                                                                        --> G_ego_plot_cell_type_union_crapome_1_expression_1.graphml (__Figure 3__) <br>
                    - __python generate_HHIP_ego_networks.py union 0 1__ --> G_ego_plot_cell_type_union_crapome_0_expression_1.graphml (__Figure S2__) <br>
    
 5. __shorthest\_path\_analysis.py__
