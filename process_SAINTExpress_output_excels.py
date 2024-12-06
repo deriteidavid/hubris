@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 df=pd.read_excel('HHIP_SAINTexpress_consolidated.xlsx')
-df_crapome=pd.read_excel('HHIP_CRAPome_SAINTexpress_consolidated.xlsx')
+df_crapome=pd.read_excel('HHIP_SAINTexpress_consolidated_CRAPome_remove_only.xlsx')
 
 df=df.fillna(0)
 
@@ -19,9 +19,9 @@ df_cons['sainte_IMR90_06']=df['SignifCall_IMR90_06']
 df_cons['sainte_16HBE_06']=df['SignifCall_16HBE_06']
 df_cons['sainte_16HBE_11']=df['SignifCall_16HBE_11']
 
-df_cons['crapome_IMR90_06']=df_crapome['SignifCall_IMR90_06']
-df_cons['crapome_16HBE_06']=df_crapome['SignifCall_16HBE_06']
-df_cons['crapome_16HBE_11']=df_crapome['SignifCall_16HBE_11']
+df_cons['crapome_IMR90_06']=df_crapome['SignifCall_IMR90_06_new_filt']
+df_cons['crapome_16HBE_06']=df_crapome['SignifCall_16HBE_06_new_filt']
+df_cons['crapome_16HBE_11']=df_crapome['SignifCall_16HBE_11_new_filt']
 
 
 df_cons['link_sum']=df_cons[['sainte_IMR90_06', 'sainte_16HBE_06','sainte_16HBE_11', 'crapome_IMR90_06', 'crapome_16HBE_06',

@@ -1,12 +1,12 @@
 #!/bin/bash
 
-conda activate py39
-
 python process_SAINTExpress_output_excels.py 
-python RNASeq_based_filtering.py #only runs on server
+python RNASeq_based_filtering_hg38.py
 python create_HUBRIS.py
 python generate_HHIP_ego_networks.py union 1 1
+python generate_HHIP_ego_networks.py union 0 1
 python shorthest_path_analysis.py 16HBE 1 1 
+python shorthest_path_analysis.py IMR90 1 1 
 python merged_shorthest_path_graph.py
 python shorthest_path_analysis.py IMR90 0 1 
 python shorthest_path_analysis.py 16HBE 0 1

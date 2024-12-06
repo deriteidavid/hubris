@@ -109,7 +109,7 @@ else:
         target_proteins[experiment]=list(df_all_HHIP_links[((df_all_HHIP_links['sainte_16HBE_06']==1) | (df_all_HHIP_links['sainte_16HBE_11']==1)) & (df_all_HHIP_links['sainte_IMR90_06']==1)]['bait_gene_symbol'])
                  
 if filter_networks_based_on_expression:
-    copd_gwas_genes=list(set(copd_gwas_genes).intersection(set(G_hubris.nodes())))
+    copd_gwas_genes=sorted(list(set(copd_gwas_genes).intersection(set(G_hubris.nodes()))))
 
 #we create a copy of hubris and add the new edges
 new_edges=[]

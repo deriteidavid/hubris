@@ -6,23 +6,7 @@
 <key id="d2" for="node" attr.name="font_color" attr.type="string"/>
 <key id="d1" for="node" attr.name="color" attr.type="string"/>
 <key id="d0" for="node" attr.name="name" attr.type="string"/>
-<graph edgedefault="undirected"><node id="DDX39A">
-  <data key="d0">DDX39A</data>
-  <data key="d1">#5ad45a</data>
-  <data key="d2">#000000</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
-<node id="APPBP2">
-  <data key="d0">APPBP2</data>
-  <data key="d1">#5ad45a</data>
-  <data key="d2">#000000</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
-<node id="SHH">
+<graph edgedefault="undirected"><node id="SHH">
   <data key="d0">SHH</data>
   <data key="d1">#ffffff</data>
   <data key="d2">#000000</data>
@@ -38,8 +22,48 @@
   <data key="d4">30</data>
   <data key="d5">12</data>
 </node>
+<node id="DDX39A">
+  <data key="d0">DDX39A</data>
+  <data key="d1">#5ad45a</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="HDAC11">
+  <data key="d0">HDAC11</data>
+  <data key="d1">#5ad45a</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="APPBP2">
+  <data key="d0">APPBP2</data>
+  <data key="d1">#5ad45a</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="PRKN">
+  <data key="d0">PRKN</data>
+  <data key="d1">#ffffff</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
 <node id="DHH">
   <data key="d0">DHH</data>
+  <data key="d1">#ffffff</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="TRIM67">
+  <data key="d0">TRIM67</data>
   <data key="d1">#ffffff</data>
   <data key="d2">#000000</data>
   <data key="d3">60</data>
@@ -54,22 +78,6 @@
   <data key="d4">30</data>
   <data key="d5">12</data>
 </node>
-<node id="TRIM67">
-  <data key="d0">TRIM67</data>
-  <data key="d1">#ffffff</data>
-  <data key="d2">#000000</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
-<node id="HDAC11">
-  <data key="d0">HDAC11</data>
-  <data key="d1">#5ad45a</data>
-  <data key="d2">#000000</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
 <node id="IHH">
   <data key="d0">IHH</data>
   <data key="d1">#ffffff</data>
@@ -78,60 +86,52 @@
   <data key="d4">30</data>
   <data key="d5">12</data>
 </node>
-<node id="PRKN">
-  <data key="d0">PRKN</data>
-  <data key="d1">#ffffff</data>
-  <data key="d2">#000000</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
-<edge source="DDX39A" target="HDAC11">
-  <data key="d6">HIPPIE, BioGrid, NCBI</data>
-</edge>
-<edge source="DDX39A" target="TRIM67">
-  <data key="d6">BioGrid, NCBI</data>
-</edge>
-<edge source="DDX39A" target="PRKN">
-  <data key="d6">BioGrid, NCBI</data>
-</edge>
-<edge source="DDX39A" target="HHIP">
-  <data key="d6">HIPPIE, BioGrid, NCBI</data>
-</edge>
-<edge source="APPBP2" target="HHIP">
-  <data key="d6">HIPPIE, BioGrid, HumanNet, NCBI</data>
-</edge>
-<edge source="APPBP2" target="PTCH1">
-  <data key="d6">HumanNet, NCBI, BioGrid, HURI, HIPPIE</data>
+<edge source="SHH" target="PTCH1">
+  <data key="d6">Interactome3D, HIPPIE, Reactome, BioGrid, StringDB, HumanNet, NCBI</data>
 </edge>
 <edge source="SHH" target="HHIP">
-  <data key="d6">HumanNet, StringDB, NCBI, HIPPIE, Interactome3D, Reactome</data>
+  <data key="d6">Interactome3D, HIPPIE, Reactome, StringDB, HumanNet, NCBI</data>
 </edge>
-<edge source="SHH" target="PTCH1">
-  <data key="d6">HumanNet, StringDB, NCBI, BioGrid, HIPPIE, Interactome3D, Reactome</data>
-</edge>
-<edge source="PTCH1" target="HHIP">
-  <data key="d6">HumanNet, HIPPIE, StringDB</data>
-</edge>
-<edge source="PTCH1" target="IHH">
-  <data key="d6">HumanNet, HIPPIE, StringDB, NCBI</data>
+<edge source="PTCH1" target="APPBP2">
+  <data key="d6">HURI, HIPPIE, BioGrid, HumanNet, NCBI</data>
 </edge>
 <edge source="PTCH1" target="DHH">
   <data key="d6">HIPPIE, HumanNet, NCBI</data>
 </edge>
-<edge source="DHH" target="HHIP">
-  <data key="d6">HIPPIE, Interactome3D, HumanNet, NCBI</data>
+<edge source="PTCH1" target="HHIP">
+  <data key="d6">HIPPIE, HumanNet, StringDB</data>
 </edge>
-<edge source="HHIP" target="HDAC11">
-  <data key="d6">HumanNet, StringDB, NCBI, BioGrid, HIPPIE</data>
+<edge source="PTCH1" target="IHH">
+  <data key="d6">HIPPIE, HumanNet, NCBI, StringDB</data>
 </edge>
-<edge source="HHIP" target="TRIM67">
+<edge source="DDX39A" target="PRKN">
   <data key="d6">BioGrid, NCBI</data>
 </edge>
-<edge source="HHIP" target="PRKN">
+<edge source="DDX39A" target="TRIM67">
+  <data key="d6">BioGrid, NCBI</data>
+</edge>
+<edge source="DDX39A" target="HDAC11">
+  <data key="d6">BioGrid, HIPPIE, NCBI</data>
+</edge>
+<edge source="DDX39A" target="HHIP">
+  <data key="d6">BioGrid, HIPPIE, NCBI</data>
+</edge>
+<edge source="HDAC11" target="HHIP">
+  <data key="d6">HIPPIE, BioGrid, StringDB, HumanNet, NCBI</data>
+</edge>
+<edge source="APPBP2" target="HHIP">
+  <data key="d6">BioGrid, HIPPIE, HumanNet, NCBI</data>
+</edge>
+<edge source="PRKN" target="HHIP">
+  <data key="d6">BioGrid, NCBI</data>
+</edge>
+<edge source="DHH" target="HHIP">
+  <data key="d6">Interactome3D, HIPPIE, HumanNet, NCBI</data>
+</edge>
+<edge source="TRIM67" target="HHIP">
   <data key="d6">BioGrid, NCBI</data>
 </edge>
 <edge source="HHIP" target="IHH">
-  <data key="d6">HumanNet, HIPPIE, StringDB, NCBI</data>
+  <data key="d6">HIPPIE, HumanNet, NCBI, StringDB</data>
 </edge>
 </graph></graphml>

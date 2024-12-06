@@ -71,11 +71,11 @@ ax = barplot(enrichment_results[nodes_subset][key_tuple].results,
              )
              
 output_file_name = 'CR_outputs/functional_enrichment/'+'_'.join([nodes_subset, *[str(i) for i in key_tuple]])
-plt.savefig(output_file_name+'.png',dpi=300,bbox_inches='tight')
-plt.savefig(output_file_name+'.pdf',bbox_inches='tight')
+ax.figure.savefig(output_file_name+'.png',dpi=300,bbox_inches='tight')
+ax.figure.savefig(output_file_name+'.pdf',bbox_inches='tight')
 
 key_tuple = ('16HBE',True,True)
-
+plt.figure()
 ax = barplot(enrichment_results[nodes_subset][key_tuple].results,
               column="Adjusted P-value",
               group='Gene_set', # set group, so you could do a multi-sample/library comparsion
@@ -87,11 +87,11 @@ ax = barplot(enrichment_results[nodes_subset][key_tuple].results,
              )
 
 output_file_name = 'CR_outputs/functional_enrichment/'+'_'.join([nodes_subset, *[str(i) for i in key_tuple]])
-plt.savefig(output_file_name+'.png',dpi=300,bbox_inches='tight')
-plt.savefig(output_file_name+'.pdf',bbox_inches='tight')
+ax.figure.savefig(output_file_name+'.png',dpi=300,bbox_inches='tight')
+ax.figure.savefig(output_file_name+'.pdf',bbox_inches='tight')
 
 key_tuple = ('union',True,False)
-
+plt.figure()
 ax = barplot(enrichment_results[nodes_subset][key_tuple].results,
               column="Adjusted P-value",
               group='Gene_set', # set group, so you could do a multi-sample/library comparsion
@@ -103,5 +103,5 @@ ax = barplot(enrichment_results[nodes_subset][key_tuple].results,
              )
 
 output_file_name = 'CR_outputs/functional_enrichment/'+'_'.join([nodes_subset, *[str(i) for i in key_tuple]])
-plt.savefig(output_file_name+'.png',dpi=300,bbox_inches='tight')
-plt.savefig(output_file_name+'.pdf',bbox_inches='tight')
+ax.figure.savefig(output_file_name+'.png',dpi=300,bbox_inches='tight')
+ax.figure.savefig(output_file_name+'.pdf',bbox_inches='tight')

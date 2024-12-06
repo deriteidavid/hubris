@@ -27,61 +27,21 @@
   <data key="d6">12</data>
   <data key="d7">Bold</data>
 </node>
-<node id="EIF2S2">
-  <data key="d0">IMR90 and 16HBE</data>
-  <data key="d1">EIF2S2</data>
-  <data key="d2">#5ad45a</data>
-  <data key="d3">#000000</data>
-  <data key="d4">60</data>
-  <data key="d5">30</data>
-  <data key="d6">12</data>
-  <data key="d7">Bold</data>
-</node>
-<node id="RPLP0">
-  <data key="d0">IMR90 and 16HBE</data>
-  <data key="d1">RPLP0</data>
-  <data key="d2">#5ad45a</data>
-  <data key="d3">#000000</data>
-  <data key="d4">60</data>
-  <data key="d5">30</data>
-  <data key="d6">12</data>
-  <data key="d7">Bold</data>
-</node>
-<node id="TFG">
-  <data key="d0">IMR90 and 16HBE</data>
-  <data key="d1">TFG</data>
-  <data key="d2">#5ad45a</data>
-  <data key="d3">#000000</data>
-  <data key="d4">60</data>
-  <data key="d5">30</data>
-  <data key="d6">12</data>
-  <data key="d7">Bold</data>
-</node>
-<node id="THBS1">
-  <data key="d0">16HBE</data>
-  <data key="d1">THBS1</data>
-  <data key="d2">#1a53ff</data>
-  <data key="d3">#ffffff</data>
-  <data key="d4">60</data>
-  <data key="d5">30</data>
-  <data key="d6">12</data>
-  <data key="d7">Bold</data>
-</node>
 <node id="CALM1">
-  <data key="d0">IMR90 and 16HBE</data>
+  <data key="d0">IMR90</data>
   <data key="d1">CALM1</data>
-  <data key="d2">#5ad45a</data>
+  <data key="d2">#ffcc00</data>
   <data key="d3">#000000</data>
   <data key="d4">60</data>
   <data key="d5">30</data>
   <data key="d6">12</data>
   <data key="d7">Bold</data>
 </node>
-<node id="EIF2S3">
-  <data key="d0">16HBE</data>
-  <data key="d1">EIF2S3</data>
-  <data key="d2">#1a53ff</data>
-  <data key="d3">#ffffff</data>
+<node id="CAVIN1">
+  <data key="d0">IMR90</data>
+  <data key="d1">CAVIN1</data>
+  <data key="d2">#ffcc00</data>
+  <data key="d3">#000000</data>
   <data key="d4">60</data>
   <data key="d5">30</data>
   <data key="d6">12</data>
@@ -97,9 +57,19 @@
   <data key="d6">12</data>
   <data key="d7">Bold</data>
 </node>
-<node id="MAP4">
+<node id="TMED10">
+  <data key="d0">16HBE</data>
+  <data key="d1">TMED10</data>
+  <data key="d2">#1a53ff</data>
+  <data key="d3">#ffffff</data>
+  <data key="d4">60</data>
+  <data key="d5">30</data>
+  <data key="d6">12</data>
+  <data key="d7">Bold</data>
+</node>
+<node id="ASPH">
   <data key="d0">IMR90</data>
-  <data key="d1">MAP4</data>
+  <data key="d1">ASPH</data>
   <data key="d2">#ffcc00</data>
   <data key="d3">#000000</data>
   <data key="d4">60</data>
@@ -127,9 +97,9 @@
   <data key="d6">12</data>
   <data key="d7">Bold</data>
 </node>
-<node id="ASPH">
+<node id="MAP4">
   <data key="d0">IMR90</data>
-  <data key="d1">ASPH</data>
+  <data key="d1">MAP4</data>
   <data key="d2">#ffcc00</data>
   <data key="d3">#000000</data>
   <data key="d4">60</data>
@@ -137,9 +107,9 @@
   <data key="d6">12</data>
   <data key="d7">Bold</data>
 </node>
-<node id="CAVIN1">
+<node id="EIF2S2">
   <data key="d0">IMR90</data>
-  <data key="d1">CAVIN1</data>
+  <data key="d1">EIF2S2</data>
   <data key="d2">#ffcc00</data>
   <data key="d3">#000000</data>
   <data key="d4">60</data>
@@ -147,9 +117,9 @@
   <data key="d6">12</data>
   <data key="d7">Bold</data>
 </node>
-<node id="HSPA1A">
+<node id="THBS1">
   <data key="d0">16HBE</data>
-  <data key="d1">HSPA1A</data>
+  <data key="d1">THBS1</data>
   <data key="d2">#1a53ff</data>
   <data key="d3">#ffffff</data>
   <data key="d4">60</data>
@@ -167,21 +137,11 @@
   <data key="d6">12</data>
   <data key="d7">Bold</data>
 </node>
-<node id="TMED10">
-  <data key="d0">16HBE</data>
-  <data key="d1">TMED10</data>
-  <data key="d2">#1a53ff</data>
-  <data key="d3">#ffffff</data>
-  <data key="d4">60</data>
-  <data key="d5">30</data>
-  <data key="d6">12</data>
-  <data key="d7">Bold</data>
-</node>
-<node id="EIF2S1">
-  <data key="d0">16HBE</data>
-  <data key="d1">EIF2S1</data>
-  <data key="d2">#1a53ff</data>
-  <data key="d3">#ffffff</data>
+<node id="RPLP0">
+  <data key="d0">IMR90</data>
+  <data key="d1">RPLP0</data>
+  <data key="d2">#ffcc00</data>
+  <data key="d3">#000000</data>
   <data key="d4">60</data>
   <data key="d5">30</data>
   <data key="d6">12</data>
@@ -227,82 +187,37 @@
   <data key="d6">12</data>
   <data key="d7">Bold</data>
 </node>
-<node id="EEF1A1">
-  <data key="d0">16HBE</data>
-  <data key="d1">EEF1A1</data>
-  <data key="d2">#1a53ff</data>
-  <data key="d3">#ffffff</data>
-  <data key="d4">60</data>
-  <data key="d5">30</data>
-  <data key="d6">12</data>
-  <data key="d7">Bold</data>
-</node>
-<node id="PYM1">
-  <data key="d0">16HBE</data>
-  <data key="d1">PYM1</data>
-  <data key="d2">#1a53ff</data>
-  <data key="d3">#ffffff</data>
-  <data key="d4">60</data>
-  <data key="d5">30</data>
-  <data key="d6">12</data>
-  <data key="d7">Bold</data>
-</node>
 <edge source="HHIP" target="UGGT1"/>
-<edge source="HHIP" target="EIF2S2"/>
-<edge source="HHIP" target="RPLP0"/>
-<edge source="HHIP" target="TFG"/>
-<edge source="HHIP" target="THBS1"/>
 <edge source="HHIP" target="CALM1"/>
-<edge source="HHIP" target="EIF2S3"/>
+<edge source="HHIP" target="CAVIN1"/>
 <edge source="HHIP" target="TMED2"/>
-<edge source="HHIP" target="MAP4"/>
+<edge source="HHIP" target="TMED10"/>
+<edge source="HHIP" target="ASPH"/>
 <edge source="HHIP" target="MMP9"/>
 <edge source="HHIP" target="GORASP2"/>
-<edge source="HHIP" target="ASPH"/>
-<edge source="HHIP" target="CAVIN1"/>
-<edge source="HHIP" target="HSPA1A"/>
+<edge source="HHIP" target="MAP4"/>
+<edge source="HHIP" target="EIF2S2"/>
+<edge source="HHIP" target="THBS1"/>
 <edge source="HHIP" target="RRBP1"/>
-<edge source="HHIP" target="TMED10"/>
-<edge source="HHIP" target="EIF2S1"/>
+<edge source="HHIP" target="RPLP0"/>
 <edge source="HHIP" target="HMGN1"/>
 <edge source="HHIP" target="TP53"/>
 <edge source="HHIP" target="TMED7"/>
 <edge source="HHIP" target="GREM1"/>
-<edge source="HHIP" target="EEF1A1"/>
-<edge source="HHIP" target="PYM1"/>
-<edge source="UGGT1" target="EIF2S3"/>
-<edge source="UGGT1" target="EIF2S1"/>
 <edge source="UGGT1" target="EIF2S2"/>
-<edge source="EIF2S2" target="EIF2S3"/>
-<edge source="EIF2S2" target="TP53"/>
-<edge source="EIF2S2" target="EIF2S1"/>
-<edge source="RPLP0" target="EIF2S3"/>
-<edge source="RPLP0" target="TP53"/>
-<edge source="RPLP0" target="EIF2S1"/>
-<edge source="RPLP0" target="HSPA1A"/>
-<edge source="RPLP0" target="EEF1A1"/>
-<edge source="THBS1" target="MMP9"/>
 <edge source="CALM1" target="HMGN1"/>
-<edge source="EIF2S3" target="TP53"/>
-<edge source="EIF2S3" target="EIF2S1"/>
-<edge source="EIF2S3" target="PYM1"/>
+<edge source="CAVIN1" target="TMED10"/>
+<edge source="CAVIN1" target="ASPH"/>
 <edge source="TMED2" target="TMED10"/>
 <edge source="TMED2" target="GORASP2"/>
 <edge source="TMED2" target="TMED7"/>
-<edge source="MAP4" target="TP53"/>
-<edge source="MAP4" target="EIF2S1"/>
-<edge source="MAP4" target="HSPA1A"/>
-<edge source="GORASP2" target="TMED7"/>
-<edge source="GORASP2" target="EEF1A1"/>
-<edge source="GORASP2" target="TMED10"/>
-<edge source="ASPH" target="TP53"/>
-<edge source="ASPH" target="CAVIN1"/>
-<edge source="ASPH" target="TMED10"/>
-<edge source="CAVIN1" target="HSPA1A"/>
-<edge source="CAVIN1" target="TMED10"/>
-<edge source="HSPA1A" target="TP53"/>
-<edge source="HSPA1A" target="EEF1A1"/>
-<edge source="RRBP1" target="EEF1A1"/>
+<edge source="TMED10" target="ASPH"/>
+<edge source="TMED10" target="GORASP2"/>
 <edge source="TMED10" target="TMED7"/>
-<edge source="TP53" target="EEF1A1"/>
+<edge source="ASPH" target="TP53"/>
+<edge source="MMP9" target="THBS1"/>
+<edge source="GORASP2" target="TMED7"/>
+<edge source="MAP4" target="TP53"/>
+<edge source="EIF2S2" target="TP53"/>
+<edge source="RPLP0" target="TP53"/>
 </graph></graphml>

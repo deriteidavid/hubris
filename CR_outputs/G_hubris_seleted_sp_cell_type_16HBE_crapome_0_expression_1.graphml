@@ -13,6 +13,62 @@
   <data key="d4">30</data>
   <data key="d5">12</data>
 </node>
+<node id="HSPA5">
+  <data key="d0">HSPA5</data>
+  <data key="d1">#5ad45a</data>
+  <data key="d2">#000000</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="DSP">
+  <data key="d0">DSP</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="TP53">
+  <data key="d0">TP53</data>
+  <data key="d1">#1a53ff</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="AHNAK">
+  <data key="d0">AHNAK</data>
+  <data key="d1">#1a53ff</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="PDIA3">
+  <data key="d0">PDIA3</data>
+  <data key="d1">#1a53ff</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="SKP1">
+  <data key="d0">SKP1</data>
+  <data key="d1">#1a53ff</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
+<node id="FBXO38">
+  <data key="d0">FBXO38</data>
+  <data key="d1">#b30000</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
 <node id="UGGT1">
   <data key="d0">UGGT1</data>
   <data key="d1">#5ad45a</data>
@@ -37,24 +93,8 @@
   <data key="d4">30</data>
   <data key="d5">12</data>
 </node>
-<node id="HSPA5">
-  <data key="d0">HSPA5</data>
-  <data key="d1">#5ad45a</data>
-  <data key="d2">#000000</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
-<node id="TP53">
-  <data key="d0">TP53</data>
-  <data key="d1">#1a53ff</data>
-  <data key="d2">#ffffff</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
-<node id="SKP1">
-  <data key="d0">SKP1</data>
+<node id="MARCKS">
+  <data key="d0">MARCKS</data>
   <data key="d1">#1a53ff</data>
   <data key="d2">#ffffff</data>
   <data key="d3">60</data>
@@ -101,22 +141,6 @@
   <data key="d4">30</data>
   <data key="d5">12</data>
 </node>
-<node id="AHNAK">
-  <data key="d0">AHNAK</data>
-  <data key="d1">#1a53ff</data>
-  <data key="d2">#ffffff</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
-<node id="CAD">
-  <data key="d0">CAD</data>
-  <data key="d1">#1a53ff</data>
-  <data key="d2">#ffffff</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
 <node id="PTBP1">
   <data key="d0">PTBP1</data>
   <data key="d1">#1a53ff</data>
@@ -141,6 +165,14 @@
   <data key="d4">30</data>
   <data key="d5">12</data>
 </node>
+<node id="CAD">
+  <data key="d0">CAD</data>
+  <data key="d1">#1a53ff</data>
+  <data key="d2">#ffffff</data>
+  <data key="d3">60</data>
+  <data key="d4">30</data>
+  <data key="d5">12</data>
+</node>
 <node id="HSPD1">
   <data key="d0">HSPD1</data>
   <data key="d1">#1a53ff</data>
@@ -151,14 +183,6 @@
 </node>
 <node id="CANX">
   <data key="d0">CANX</data>
-  <data key="d1">#1a53ff</data>
-  <data key="d2">#ffffff</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
-<node id="PDIA3">
-  <data key="d0">PDIA3</data>
   <data key="d1">#1a53ff</data>
   <data key="d2">#ffffff</data>
   <data key="d3">60</data>
@@ -205,8 +229,8 @@
   <data key="d4">30</data>
   <data key="d5">12</data>
 </node>
-<node id="THBS1">
-  <data key="d0">THBS1</data>
+<node id="MMP9">
+  <data key="d0">MMP9</data>
   <data key="d1">#1a53ff</data>
   <data key="d2">#ffffff</data>
   <data key="d3">60</data>
@@ -221,17 +245,9 @@
   <data key="d4">30</data>
   <data key="d5">12</data>
 </node>
-<node id="MMP9">
-  <data key="d0">MMP9</data>
+<node id="THBS1">
+  <data key="d0">THBS1</data>
   <data key="d1">#1a53ff</data>
-  <data key="d2">#ffffff</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
-<node id="DSP">
-  <data key="d0">DSP</data>
-  <data key="d1">#b30000</data>
   <data key="d2">#ffffff</data>
   <data key="d3">60</data>
   <data key="d4">30</data>
@@ -245,76 +261,70 @@
   <data key="d4">30</data>
   <data key="d5">12</data>
 </node>
-<node id="FBXO38">
-  <data key="d0">FBXO38</data>
-  <data key="d1">#b30000</data>
-  <data key="d2">#ffffff</data>
-  <data key="d3">60</data>
-  <data key="d4">30</data>
-  <data key="d5">12</data>
-</node>
-<edge source="HHIP" target="UGGT1"/>
 <edge source="HHIP" target="HSPA5"/>
 <edge source="HHIP" target="TP53"/>
+<edge source="HHIP" target="AHNAK"/>
+<edge source="HHIP" target="PDIA3"/>
 <edge source="HHIP" target="SKP1"/>
+<edge source="HHIP" target="UGGT1"/>
+<edge source="HHIP" target="MARCKS"/>
 <edge source="HHIP" target="RUVBL1"/>
 <edge source="HHIP" target="RUVBL2"/>
 <edge source="HHIP" target="DDX21"/>
 <edge source="HHIP" target="USP9X"/>
 <edge source="HHIP" target="ABCF1"/>
-<edge source="HHIP" target="AHNAK"/>
-<edge source="HHIP" target="CAD"/>
 <edge source="HHIP" target="PTBP1"/>
 <edge source="HHIP" target="ATP5F1A"/>
 <edge source="HHIP" target="HSP90B1"/>
+<edge source="HHIP" target="CAD"/>
 <edge source="HHIP" target="HSPD1"/>
 <edge source="HHIP" target="CANX"/>
-<edge source="HHIP" target="PDIA3"/>
 <edge source="HHIP" target="RPL5"/>
 <edge source="HHIP" target="CTNNA1"/>
 <edge source="HHIP" target="TUBB4B"/>
 <edge source="HHIP" target="TUBA1B"/>
-<edge source="HHIP" target="THBS1"/>
 <edge source="HHIP" target="MMP9"/>
+<edge source="HHIP" target="THBS1"/>
+<edge source="HSPA5" target="DSP"/>
+<edge source="HSPA5" target="CCDC8"/>
+<edge source="HSPA5" target="WDR76"/>
+<edge source="DSP" target="TP53"/>
+<edge source="DSP" target="AHNAK"/>
+<edge source="DSP" target="PDIA3"/>
+<edge source="TP53" target="CCDC8"/>
+<edge source="TP53" target="TET2"/>
+<edge source="AHNAK" target="CCDC8"/>
+<edge source="PDIA3" target="CCDC8"/>
+<edge source="SKP1" target="FBXO38"/>
+<edge source="SKP1" target="CCDC8"/>
 <edge source="UGGT1" target="CCDC8"/>
 <edge source="CCDC8" target="MFAP2"/>
-<edge source="CCDC8" target="HSPA5"/>
-<edge source="CCDC8" target="TP53"/>
-<edge source="CCDC8" target="SKP1"/>
+<edge source="CCDC8" target="MARCKS"/>
 <edge source="CCDC8" target="RUVBL1"/>
 <edge source="CCDC8" target="RUVBL2"/>
 <edge source="CCDC8" target="DDX21"/>
 <edge source="CCDC8" target="USP9X"/>
 <edge source="CCDC8" target="ABCF1"/>
-<edge source="CCDC8" target="AHNAK"/>
-<edge source="CCDC8" target="CAD"/>
 <edge source="CCDC8" target="PTBP1"/>
 <edge source="CCDC8" target="ATP5F1A"/>
 <edge source="CCDC8" target="HSP90B1"/>
+<edge source="CCDC8" target="CAD"/>
 <edge source="CCDC8" target="HSPD1"/>
 <edge source="CCDC8" target="CANX"/>
-<edge source="CCDC8" target="PDIA3"/>
 <edge source="CCDC8" target="RPL5"/>
 <edge source="CCDC8" target="CTNNA1"/>
 <edge source="MFAP2" target="WDR76"/>
 <edge source="MFAP2" target="FBN2"/>
-<edge source="HSPA5" target="WDR76"/>
-<edge source="HSPA5" target="DSP"/>
-<edge source="TP53" target="DSP"/>
-<edge source="TP53" target="TET2"/>
-<edge source="SKP1" target="FBXO38"/>
-<edge source="AHNAK" target="DSP"/>
-<edge source="CAD" target="WDR76"/>
 <edge source="PTBP1" target="WDR76"/>
 <edge source="ATP5F1A" target="WDR76"/>
 <edge source="HSP90B1" target="WDR76"/>
+<edge source="CAD" target="WDR76"/>
 <edge source="HSPD1" target="WDR76"/>
 <edge source="HSPD1" target="TET2"/>
-<edge source="PDIA3" target="DSP"/>
 <edge source="CTNNA1" target="WDR76"/>
 <edge source="TUBB4B" target="WDR76"/>
 <edge source="WDR76" target="TUBA1B"/>
 <edge source="TUBA1B" target="TET2"/>
-<edge source="THBS1" target="FBN2"/>
-<edge source="FBN2" target="MMP9"/>
+<edge source="MMP9" target="FBN2"/>
+<edge source="FBN2" target="THBS1"/>
 </graph></graphml>
