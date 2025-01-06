@@ -14,7 +14,7 @@ To run the Python scripts reproducing the network analysis results published in 
 __run_all_scirpts_in_sequence.sh__
 
 NOTE: Some of the larger files, such as the PPI databases and the HUBRIS network are not uploaded to this repository. To download the PPI databases from their respective sources set the __re_download__ parameter in __create_HUBRIS.py__ to _True_. Processing of the database files is done automatically, however, if changes were made to the file structure (by the db host) the code/configuration may need to be adapted. Details of the PPI databases can be configured in the __databases.xlsx__ file which is automatically read by the create_HUBRIS.py script. <br>
-Alternatively, the stable version of the database files is available on Zenodo: (link placeholder)
+Alternatively, the stable version of the database files is available on Zenodo: https://doi.org/10.5281/zenodo.14604608 
 # Running scripts individually 
 The documentation of the code is in progress, please contact the authors if you have any questions at david.deritei@channing.harvard.edu
 
